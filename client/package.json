@@ -41,6 +41,7 @@
         "webpack-dev-server": "^3.8.0"
     },
     "dependencies": {
+        "lib": "C:/work/git/tanks/server/lib",
         "jquery": "^3.7.1",
         "socket.io-client": "^2.2.0"
     }

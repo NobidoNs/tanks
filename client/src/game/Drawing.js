@@ -3,8 +3,8 @@
  * @author kennethli.3470@gmail.com (Kenneth Li)
  */
 
-const Constants = require('../../../lib/Constants')
-const Util = require('../../../lib/Util')
+const Constants = require('lib/Constants')
+const Util = require('lib/Util')
 
 /**
  * Drawing class.

@@ -9,9 +9,9 @@ const Input = require('./Input')
 const Leaderboard = require('./Leaderboard')
 const Viewport = require('./Viewport')
 
-const Constants = require('../../../lib/Constants')
-const Vector = require('../../../lib/Vector')
-const Util = require('../../../lib/Util')
+const Constants = require('lib/Constants')
+const Vector = require('lib/Vector')
+const Util = require('lib/Util')
 
 /**
  * Game class.

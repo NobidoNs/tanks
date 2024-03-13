@@ -3,9 +3,9 @@
  * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
-const Constants = require('../../../lib/Constants')
-const Entity = require('../../../lib/Entity')
-const Vector = require('../../../lib/Vector')
+const Constants = require('lib/Constants')
+const Entity = require('lib/Entity')
+const Vector = require('lib/Vector')
 
 /**
  * Viewport class.

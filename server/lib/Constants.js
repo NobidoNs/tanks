@@ -15,7 +15,7 @@ module.exports = {
   DRAWING_NAME_COLOR: 'black',
   DRAWING_HP_COLOR: 'green',
   DRAWING_HP_MISSING_COLOR: 'red',
-  DRAWING_IMG_BASE_PATH: '/img',
+  DRAWING_IMG_BASE_PATH: 'img',
   DRAWING_IMG_SELF_TANK: 'self_tank',
   DRAWING_IMG_SELF_TURRET: 'self_turret',
   DRAWING_IMG_OTHER_TANK: 'other_tank',
