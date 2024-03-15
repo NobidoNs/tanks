@@ -97,7 +97,7 @@ class Drawing {
       this.context.fillRect(-25 + 5 * i, -40, 5, 4)
     }
 
-    this.context.rotate(Drawing.translateAngle(player.tankAngle))
+    this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
     this.drawCenteredImage(this.images[
       // eslint-disable-next-line multiline-ternary
       isSelf ? Constants.DRAWING_IMG_SELF_TANK :
@@ -105,7 +105,7 @@ class Drawing {
     ])
     this.context.rotate(-Drawing.translateAngle(player.tankAngle))
 
-    this.context.rotate(Drawing.translateAngle(player.turretAngle))
+    this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
     this.drawCenteredImage(this.images[
       // eslint-disable-next-line multiline-ternary
       isSelf ? Constants.DRAWING_IMG_SELF_TURRET :
@@ -128,7 +128,7 @@ class Drawing {
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(bullet.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
-    this.context.rotate(Drawing.translateAngle(bullet.angle))
+    this.context.rotate(Drawing.translateAngle(bullet.angle)-Math.PI/2)
     this.drawCenteredImage(this.images[Constants.DRAWING_IMG_BULLET])
     this.context.restore()
   }

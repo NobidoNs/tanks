@@ -64,7 +64,7 @@ class Player extends Entity {
    * @param {Object} data A JSON Object storing the input state
    */
   updateOnInput(data) {
-    console.log(Constants.PLAYER_TURN_RATE)
+    // console.log(Constants.PLAYER_TURN_RATE)
     if (data.up) {
       this.velocity = Vector.fromPolar(this.speed, this.tankAngle)
     } else if (data.down) {
