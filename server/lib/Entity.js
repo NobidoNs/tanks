@@ -37,6 +37,21 @@ class Entity {
       minDistance * minDistance
   }
 
+  bulletCollidedPipe(other, turretAngel) {
+    // console.log(other)
+    // console.log(other.position.x)
+    const vx=other.position.x-this.position.x
+    const vy=other.position.y-this.position.y
+    let angle = Math.atan2(vy, vx)
+    if (angle < 0) {
+      angle+=2*Math.PI}
+    // console.log(vx,vy)
+    // console.log(angle)
+    // console.log(turretAngel)
+    if (Math.abs(angle-turretAngel)<=1) {return true}
+    return false
+  }
+
   /**
    * Returns true if this Entity is inside the bounds of the game environment
    * world.

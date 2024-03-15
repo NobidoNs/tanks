@@ -124,6 +124,9 @@ class Game {
       ...this.projectiles,
       ...this.powerups
     ]
+    // this.players.forEach(
+    //   entity => {console.log(Object.values(entity))})
+
     entities.forEach(
       entity => { entity.update(this.lastUpdateTime, this.deltaTime) })
     for (let i = 0; i < entities.length; ++i) {
@@ -141,12 +144,15 @@ class Game {
         }
         if (e1 instanceof Player && e2 instanceof Bullet &&
           e2.source !== e1) {
-          e1.damage(e2.damage)
-          if (e1.isDead()) {
-            e1.spawn()
-            e1.deaths++
-            e2.source.kills++
-          }
+            if (!e1.bulletCollidedPipe(e2,e1.turretAngle)) {
+              console.log(e1.bulletCollidedPipe(e2,e1.turretAngle))
+              e1.damage(e2.damage)
+              if (e1.isDead()) {
+                e1.spawn()
+                e1.deaths++
+                e2.source.kills++
+              }
+            }
           e2.destroyed = true
         }
 

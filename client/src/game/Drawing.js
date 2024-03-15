@@ -106,6 +106,9 @@ class Drawing {
     this.context.rotate(-Drawing.translateAngle(player.tankAngle))
 
     this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
+    // this.context.fillStyle = Constants.DRAWING_HP_MISSING_COLOR
+    // this.context.fillRect(0, -10, 40, 20)
+    // this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
     this.drawCenteredImage(this.images[
       // eslint-disable-next-line multiline-ternary
       isSelf ? Constants.DRAWING_IMG_SELF_TURRET :
