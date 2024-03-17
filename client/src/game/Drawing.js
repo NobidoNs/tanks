@@ -97,6 +97,15 @@ class Drawing {
       this.context.fillRect(-25 + 5 * i, -40, 5, 4)
     }
 
+    for (let i = 0; i < 10; ++i) {
+      if (i < player.health) {
+        this.context.fillStyle = Constants.DRAWING_POWER_COLOR
+      } else {
+        this.context.fillStyle = Constants.DRAWING_POWER_MISSING_COLOR
+      }
+      this.context.fillRect(-25 + 5 * i, -30, 5, 4)
+    }
+
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
     this.drawCenteredImage(this.images[
       // eslint-disable-next-line multiline-ternary

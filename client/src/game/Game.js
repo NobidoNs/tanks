@@ -147,8 +147,10 @@ class Game {
 
       this.powerups.forEach(this.drawing.drawPowerup.bind(this.drawing))
 
+      this.players.forEach(tank => {if (tank.socketID!=this.self.socketID) {this.drawing.drawTank(false, tank)}})
+      // this.players.forEach(tank => console.log(tank))
+      // console.log(this.self.socketID)
       this.drawing.drawTank(true, this.self)
-      this.players.forEach(tank => this.drawing.drawTank(false, tank))
     }
   }
 }

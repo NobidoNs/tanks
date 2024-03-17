@@ -15,6 +15,8 @@ module.exports = {
   DRAWING_NAME_COLOR: 'black',
   DRAWING_HP_COLOR: 'green',
   DRAWING_HP_MISSING_COLOR: 'red',
+  DRAWING_POWER_COLOR: 'blue',
+  DRAWING_POWER_MISSING_COLOR: 'grey',
   DRAWING_IMG_BASE_PATH: 'img',
   DRAWING_IMG_SELF_TANK: 'self_tank',
   DRAWING_IMG_SELF_TURRET: 'self_turret',
@@ -27,7 +29,7 @@ module.exports = {
     'self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
     'bullet', 'tile'
   ],
-  DRAWING_TILE_SIZE: 100,
+  DRAWING_TILE_SIZE: 90,
 
   VIEWPORT_STICKINESS: 0.004,
 
