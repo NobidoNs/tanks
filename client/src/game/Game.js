@@ -55,8 +55,12 @@ class Game {
    */
   static create(socket, canvasElementID, leaderboardElementID) {
     const canvas = document.getElementById(canvasElementID)
-    canvas.width = Constants.CANVAS_WIDTH
-    canvas.height = Constants.CANVAS_HEIGHT
+    canvas.width = window.screen.width
+    // screen.height return bad answer (9.2 is pick coefficent)
+    canvas.height = window.screen.height-window.screen.height/9.2 
+    
+    // console.log(canvas)
+    // console.log(window.screen.height, window.screen.width)
 
     const viewport = Viewport.create(canvas)
     const drawing = Drawing.create(canvas, viewport)
@@ -88,7 +92,7 @@ class Game {
     this.projectiles = state.projectiles
     this.powerups = state.powerups
     this.viewport.updateTrackingPosition(state.self)
-    this.leaderboard.update(state.players)
+    // this.leaderboard.update(state.players)
   }
 
   /**
@@ -117,11 +121,13 @@ class Game {
   update() {
     if (this.self) {
       this.viewport.update(this.deltaTime)
-
-      const absoluteMouseCoords = this.viewport.toWorld(
+      let absoluteMouseCoords = this.viewport.toWorld(
         Vector.fromArray(this.input.mouseCoords))
+      // absoluteMouseCoords['y']+=45
+      // absoluteMouseCoords['x']+=125
       const playerToMouseVector = Vector.sub(this.self.position,
         absoluteMouseCoords)
+      // console.log(this.self.position)
 
       this.socket.emit(Constants.SOCKET_PLAYER_ACTION, {
         up: this.input.up,
@@ -149,7 +155,7 @@ class Game {
 
       this.players.forEach(tank => {if (tank.socketID!=this.self.socketID) {this.drawing.drawTank(false, tank)}})
       // this.players.forEach(tank => console.log(tank))
-      // console.log(this.self.socketID)
+      // console.log(this.self.turretAngle)
       this.drawing.drawTank(true, this.self)
     }
   }

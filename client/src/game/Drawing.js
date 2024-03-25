@@ -105,8 +105,8 @@ class Drawing {
       }
       this.context.fillRect(-25 + 5 * i, -30, 5, 4)
     }
-
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
+    // console.log(player.turretAngle)
     this.drawCenteredImage(this.images[
       // eslint-disable-next-line multiline-ternary
       isSelf ? Constants.DRAWING_IMG_SELF_TANK :

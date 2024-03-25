@@ -32,11 +32,11 @@ class Chat {
    * @return {Chat}
    */
   static create(socket, displayElementID, inputElementID) {
-    const displayElement = document.getElementById(displayElementID)
-    const inputElement = document.getElementById(inputElementID)
-    const chat = new Chat(socket, displayElement, inputElement)
-    chat.init()
-    return chat
+    // const displayElement = document.getElementById(displayElementID)
+    // const inputElement = document.getElementById(inputElementID)
+    // const chat = new Chat(socket, displayElement, inputElement)
+    // chat.init()
+    // return chat
   }
 
   /**

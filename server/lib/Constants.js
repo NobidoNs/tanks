@@ -8,9 +8,6 @@ module.exports = {
   WORLD_MAX: 5000,
   WORLD_PADDING: 30,
 
-  CANVAS_WIDTH: 800,
-  CANVAS_HEIGHT: 600,
-
   DRAWING_NAME_FONT: '14px Helvetica',
   DRAWING_NAME_COLOR: 'black',
   DRAWING_HP_COLOR: 'green',
