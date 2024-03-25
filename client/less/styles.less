@@ -58,53 +58,77 @@ html, body {
   // user-select: none;
 }
 
-// #name-prompt-overlay {
-//   width: 100%;
-//   height: 100%;
+#name-prompt-overlay {
+  width: 100%;
+  height: 100%;
 
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-//   background-color: rgba(49, 49, 49, 0.5);
-//   z-index: 1;
+  background-color: rgba(49, 49, 49, 0.5);
+  z-index: 1;
 
-//   #name-prompt-container {
-//     position: absolute;
-//     width: 490px;
-//     height: 100px;
+  #name-prompt-container {
+    position: absolute;
+    width: 160px;
+    height: 55px;
 
-//     top: 50%;
-//     right: 0;
-//     left: 0;
+    top: 50%;
+    right: 0;
+    left: 0;
 
-//     margin: -50px auto;
-//     padding: 30px;
-//     background: #bbb;
-//     z-index: 2;
+    margin: -50px auto;
+    padding: 30px;
+    background: #ffffff;
+    z-index: 2;
 
-//     border-radius: 10px;
+    border-radius: 10px;
+  }
+}
 
-//     input, input:focus {
-//       outline: none;
-//     }
+#name-submit {
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  cursor: pointer;
+  padding:10px;
+  border:none;
+  background-color:#3F51B5;
+  color:#fff;
+  font-weight:600;
+  border-radius:5px;
+  width:90%;
+  box-shadow: 5px 5px 8px #3F51B5;
+}
 
-//     #name-submit:hover {
-//       cursor: pointer;
-//     }
-//   }
-// }
+#name-form {
+  position: absolute;
+  top: 0%;
+  left: 3%;
+  border: 25px;
+  font-weight:600
+}
 
-// #container {
-//   table {
-//     width: 100%;
-//     height: 100%;
-//     // margin: auto;
-//     // border-collapse: separate;
-//   }
-// }
+input[type=text] {
+  // position: auto;
+  font-weight:600;
+  padding: 10px;
+  margin:10px 5px; // add top and bottom margin
+  border-radius:10px;
+  box-shadow: 5px 5px 8px rgba(89, 0, 255, 0.5);
+}
+
+#container {
+  table {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border-collapse: separate;
+  }
+}
 
 #canvas {
   width: 100%;
@@ -112,6 +136,6 @@ html, body {
   margin: 0;
   outline: none;
 
-  background-color: #bca5a599;
+  background-color: rgba(49, 49, 49, 0.5);
   cursor: crosshair;
 }
