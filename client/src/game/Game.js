@@ -58,7 +58,7 @@ class Game {
     canvas.width = window.screen.width
     // screen.height return bad answer (9.2 is pick coefficent)
     canvas.height = window.screen.height-window.screen.height/9.2 
-    
+
     // console.log(canvas)
     // console.log(window.screen.height, window.screen.width)
 
@@ -127,7 +127,7 @@ class Game {
       // absoluteMouseCoords['x']+=125
       const playerToMouseVector = Vector.sub(this.self.position,
         absoluteMouseCoords)
-      // console.log(this.self.position)
+      // console.log(this.input.gun)
 
       this.socket.emit(Constants.SOCKET_PLAYER_ACTION, {
         up: this.input.up,
@@ -135,7 +135,8 @@ class Game {
         left: this.input.left,
         right: this.input.right,
         shoot: this.input.mouseDown,
-        turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI)
+        turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI),
+        gun: this.input.gun
       })
     }
   }

@@ -79,6 +79,7 @@ class Drawing {
    * @param {Player} player The player object to draw.
    */
   drawTank(isSelf, player) {
+    // console.log(player)
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(player.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
@@ -88,22 +89,22 @@ class Drawing {
     this.context.fillStyle = Constants.DRAWING_NAME_COLOR
     this.context.fillText(player.name, 0, -50)
 
-    for (let i = 0; i < 10; ++i) {
+    for (let i = 0; i < Constants.PLAYER_MAX_HEALTH; ++i) {
       if (i < player.health) {
         this.context.fillStyle = Constants.DRAWING_HP_COLOR
       } else {
         this.context.fillStyle = Constants.DRAWING_HP_MISSING_COLOR
       }
-      this.context.fillRect(-25 + 5 * i, -40, 5, 4)
+      this.context.fillRect(-35 + 0.7 * i, -40, 0.7, 4)
     }
 
-    for (let i = 0; i < 10; ++i) {
-      if (i < player.health) {
-        this.context.fillStyle = Constants.DRAWING_POWER_COLOR
+    for (let i = 0; i < Constants.PLAYER_MAX_ENERGY; ++i) {
+      if (i < player.energy) {
+        this.context.fillStyle = Constants.DRAWING_ENERGY_COLOR
       } else {
-        this.context.fillStyle = Constants.DRAWING_POWER_MISSING_COLOR
+        this.context.fillStyle = Constants.DRAWING_ENERGY_MISSING_COLOR
       }
-      this.context.fillRect(-25 + 5 * i, -30, 5, 4)
+      this.context.fillRect(-35 + 0.7 * i, -30, 0.7, 4)
     }
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
     // console.log(player.turretAngle)

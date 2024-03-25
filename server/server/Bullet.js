@@ -25,7 +25,8 @@ class Bullet extends Entity {
     this.angle = angle
     this.source = source
 
-    this.damage = Constants.BULLET_DEFAULT_DAMAGE
+    // console.log(this.velocity.mag2)
+    this.damage = Constants.BULLET_DEFAULT_DAMAGE*this.velocity.mag2
     this.distanceTraveled = 0
     this.destroyed = false
   }

@@ -75,7 +75,7 @@ class Vector {
    * @return {number}
    */
   get mag() {
-    return Math.sqrt(this.mag)
+    return Math.sqrt(this.mag2)
   }
 
   /**
@@ -98,7 +98,7 @@ class Vector {
    * Return the Vector as an array representation.
    * @return {Array<number>}
    */
-  get asArray() {
+  static asArray() {
     return [this.x, this.y]
   }
 

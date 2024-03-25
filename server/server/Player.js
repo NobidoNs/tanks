@@ -39,7 +39,9 @@ class Player extends Entity {
     this.shotCooldown = Constants.PLAYER_SHOT_COOLDOWN
     this.lastShotTime = 0
     this.health = Constants.PLAYER_MAX_HEALTH
+    this.energy = Constants.PLAYER_START_ENERGY
     this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
+    this.gun = ''
 
     this.powerups = {}
 
@@ -80,6 +82,9 @@ class Player extends Entity {
     } else if (!(data.left ^ data.right)) {
       this.turnRate = 0
     }
+
+    // console.log(data.gun)
+    this.gun = data.gun
 
     this.turretAngle = data.turretAngle
   }
@@ -205,6 +210,14 @@ class Player extends Entity {
       this.powerups[Powerup.SHIELD].data -= 1
     } else {
       this.health -= amount
+    }
+  }
+
+  energyAdd(amount) {
+    if (this.energy+amount>=Constants.PLAYER_MAX_ENERGY) {
+      this.energy=Constants.PLAYER_MAX_ENERGY
+    } else {
+      this.energy+=amount
     }
   }
 

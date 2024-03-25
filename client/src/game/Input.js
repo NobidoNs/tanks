@@ -16,7 +16,7 @@ class Input {
     this.down = false
     this.left = false
     this.right = false
-
+    this.gun = 'pipe'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
   }
@@ -57,6 +57,12 @@ class Input {
     case 40:
     case 83:
       this.down = true
+    case 81:
+      if (this.gun == 'pipe') {
+        this.gun = 'collecter'
+      } else {
+        this.gun = 'pipe'
+      }
     default:
       break
     }

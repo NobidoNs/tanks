@@ -100,7 +100,8 @@ class Game {
     const player = this.players.get(socketID)
     if (player) {
       player.updateOnInput(data)
-      if (data.shoot && player.canShoot()) {
+      // console.log(player.gun)
+      if (data.shoot && player.canShoot() && player.gun=='pipe') {
         const projectiles = player.getProjectilesFromShot()
         this.projectiles.push(...projectiles)
       }
@@ -144,8 +145,10 @@ class Game {
         }
         if (e1 instanceof Player && e2 instanceof Bullet &&
           e2.source !== e1) {
-            if (!e1.bulletCollidedPipe(e2,e1.turretAngle)) {
-              console.log(e1.bulletCollidedPipe(e2,e1.turretAngle))
+            console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
+            if (e1.bulletCollidedPipe(e2,e1.turretAngle) && e1.gun=='collecter') {
+              e1.energyAdd(e2.damage)
+            } else {
               e1.damage(e2.damage)
               if (e1.isDead()) {
                 e1.spawn()
