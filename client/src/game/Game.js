@@ -92,7 +92,7 @@ class Game {
     this.projectiles = state.projectiles
     this.powerups = state.powerups
     this.viewport.updateTrackingPosition(state.self)
-    // this.leaderboard.update(state.players)
+    this.leaderboard.update(state.players)
   }
 
   /**
