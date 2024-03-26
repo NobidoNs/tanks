@@ -58,11 +58,14 @@ class Input {
     case 83:
       this.down = true
     case 81:
-      if (this.gun == 'pipe') {
-        this.gun = 'collecter'
-      } else {
-        this.gun = 'pipe'
-      }
+      this.gun = 'collecter'
+      break
+    case 69:
+      this.gun = 'pipe'
+      break
+    case 82:
+      this.gun = 'lazer'
+      break
     default:
       break
     }

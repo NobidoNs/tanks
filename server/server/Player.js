@@ -179,8 +179,8 @@ class Player extends Entity {
    * perform a shot cooldown check and resets the shot cooldown.
    * @return {Array<Bullet>}
    */
-  getProjectilesFromShot() {
-    const bullets = [Bullet.createFromPlayer(this)]
+  getProjectilesFromShot(velocity, type) {
+    const bullets = [Bullet.createFromPlayer(this, 0, velocity, type)]
     const shotgunPowerup = this.powerups[Constants.POWERUP_SHOTGUN]
     if (shotgunPowerup) {
       for (let i = 1; i <= shotgunPowerup.data; ++i) {

@@ -101,9 +101,14 @@ class Game {
     if (player) {
       player.updateOnInput(data)
       // console.log(player.gun)
-      if (data.shoot && player.canShoot() && player.gun=='pipe') {
-        const projectiles = player.getProjectilesFromShot()
-        this.projectiles.push(...projectiles)
+      if (data.shoot && player.canShoot()) {
+        if (player.gun=='pipe') {
+          const projectiles = player.getProjectilesFromShot(-1, 'pipeBullet')
+          this.projectiles.push(...projectiles)
+        } else if (player.gun=='lazer') {
+          const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
+          this.projectiles.push(...projectiles)
+        }
       }
     }
   }
@@ -123,7 +128,7 @@ class Game {
     const entities = [
       ...this.players.values(),
       ...this.projectiles,
-      ...this.powerups
+      // ...this.powerups
     ]
     // this.players.forEach(
     //   entity => {console.log(Object.values(entity))})

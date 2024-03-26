@@ -19,16 +19,17 @@ class Bullet extends Entity {
    * @param {number} angle The orientation of the bullet
    * @param {Player} source The Player object firing the bullet
    */
-  constructor(position, velocity, angle, source) {
+  constructor(position, velocity, angle, source, type) {
     super(position, velocity, Vector.zero(), Constants.BULLET_HITBOX_SIZE)
 
     this.angle = angle
     this.source = source
 
     // console.log(this.velocity.mag2)
-    this.damage = Constants.BULLET_DEFAULT_DAMAGE*this.velocity.mag2
+    this.damage = Constants.BULLET_DEFAULT_DAMAGE+this.velocity.mag2
     this.distanceTraveled = 0
     this.destroyed = false
+    this.type = type
   }
 
   /**
@@ -38,13 +39,14 @@ class Bullet extends Entity {
    *   not traveling in the direction of the turret
    * @return {Bullet}
    */
-  static createFromPlayer(player, angleDeviation = 0) {
+  static createFromPlayer(player, angleDeviation = 0, velocity, type) {
     const angle = player.turretAngle + angleDeviation
     return new Bullet(
       player.position.copy(),
-      Vector.fromPolar(Constants.BULLET_SPEED, angle),
+      Vector.fromPolar(Constants.BULLET_SPEED+velocity, angle),
       angle,
-      player
+      player,
+      type
     )
   }
 

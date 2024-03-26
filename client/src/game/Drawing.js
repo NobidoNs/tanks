@@ -138,11 +138,20 @@ class Drawing {
    * @param {Bullet} bullet The bullet to draw to the canvas
    */
   drawBullet(bullet) {
+    // console.log(bullet.type)
+    let img = ''
+    switch (bullet.type) {
+    case "pipeBullet":
+      img = Constants.DRAWING_IMG_PIPE_BULLET
+      break
+    case "lazerBullet":
+      img = Constants.DRAWING_IMG_LAZER_BULLET
+    }
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(bullet.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
     this.context.rotate(Drawing.translateAngle(bullet.angle)-Math.PI/2)
-    this.drawCenteredImage(this.images[Constants.DRAWING_IMG_BULLET])
+    this.drawCenteredImage(this.images[img])
     this.context.restore()
   }
 
