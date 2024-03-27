@@ -12,6 +12,7 @@ const Viewport = require('./Viewport')
 const Constants = require('lib/Constants')
 const Vector = require('lib/Vector')
 const Util = require('lib/Util')
+const Cooldown = require('./cooldown')
 
 /**
  * Game class.
@@ -26,13 +27,14 @@ class Game {
    * @param {Leaderboard} leaderboard The Leaderboard object handling the
    *   leaderboard update
    */
-  constructor(socket, viewport, drawing, input, leaderboard) {
+  constructor(socket, viewport, drawing, input, leaderboard, cooldowns) {
     this.socket = socket
 
     this.viewport = viewport
     this.drawing = drawing
     this.input = input
     this.leaderboard = leaderboard
+    this.cooldowns = cooldowns
 
     this.self = null
     this.players = []
@@ -67,8 +69,9 @@ class Game {
     const input = Input.create(document, canvas)
 
     const leaderboard = Leaderboard.create(leaderboardElementID)
+    const cooldowns = Cooldown.create()
 
-    const game = new Game(socket, viewport, drawing, input, leaderboard)
+    const game = new Game(socket, viewport, drawing, input, leaderboard, cooldowns)
     game.init()
     return game
   }
@@ -93,6 +96,7 @@ class Game {
     this.powerups = state.powerups
     this.viewport.updateTrackingPosition(state.self)
     this.leaderboard.update(state.players)
+    this.cooldowns.update(state.players)
   }
 
   /**

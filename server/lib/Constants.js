@@ -8,8 +8,8 @@ module.exports = {
   WORLD_MAX: 5000,
   WORLD_PADDING: 30,
 
-  DRAWING_NAME_FONT: '14px Helvetica',
-  DRAWING_NAME_COLOR: 'black',
+  DRAWING_NAME_FONT: '18px Helvetica',
+  DRAWING_NAME_COLOR: 'light_blue',
   DRAWING_HP_COLOR: 'red',
   DRAWING_HP_MISSING_COLOR: 'grey',
   DRAWING_ENERGY_COLOR: 'blue',

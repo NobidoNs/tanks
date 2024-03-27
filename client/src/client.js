@@ -23,7 +23,7 @@ $(document).ready(() => {
   const name = 'tim'
   console.log('new-pl')
   socket.emit('new-player', { name }, () => {
-    console.log('s em')
+    // console.log('s em')
     $('#name-prompt-overlay').remove()
     $('#canvas').focus()
     game.run()
