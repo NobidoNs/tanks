@@ -42,6 +42,9 @@ class Player extends Entity {
     this.energy = Constants.PLAYER_START_ENERGY
     this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
     this.gun = ''
+    this.dash = false
+    this.dashCooldown = Constants.PLAYER_DASH_COOLDOWN
+    this.lastDashTime = 0
 
     this.powerups = {}
 
@@ -85,6 +88,7 @@ class Player extends Entity {
 
     // console.log(data.gun)
     this.gun = data.gun
+    this.dash = data.dash
 
     this.turretAngle = data.turretAngle
   }
@@ -94,14 +98,23 @@ class Player extends Entity {
    * @param {number} lastUpdateTime The last timestamp an update occurred
    * @param {number} deltaTime The timestep to compute the update with
    */
-  update(lastUpdateTime, deltaTime) {
+  update(lastUpdateTime, deltaTime, dash=false) {
     this.lastUpdateTime = lastUpdateTime
     this.position.add(Vector.scale(this.velocity, deltaTime))
+    // if (dash) {this.position.add(Vector.scale(this.velocity, 40))}
+    // console.log(deltaTime)
     this.boundToWorld()
     this.tankAngle = Util.normalizeAngle(
       this.tankAngle + this.turnRate * deltaTime)
 
     this.updatePowerups()
+  }
+
+  doDash() {
+    if (this.lastUpdateTime+Constants.PLAYER_DASH_DURATION > this.lastDashTime) {
+      this.position.add(Vector.fromPolar(Constants.PLAYER_DASH_SPEED, this.tankAngle))
+    }
+    this.lastDashTime = this.lastUpdateTime
   }
 
   /**
@@ -173,6 +186,10 @@ class Player extends Entity {
     return this.lastUpdateTime > this.lastShotTime + this.shotCooldown
   }
 
+  canDash() {
+    return this.lastUpdateTime > this.lastDashTime + this.dashCooldown
+  }
+
   /**
    * Returns an array containing new projectile objects as if the player has
    * fired a shot given their current powerup state. This function does not
@@ -216,6 +233,8 @@ class Player extends Entity {
   energyAdd(amount) {
     if (this.energy+amount>=Constants.PLAYER_MAX_ENERGY) {
       this.energy=Constants.PLAYER_MAX_ENERGY
+    } else if (this.energy+amount<=0) {
+      this.energy=0
     } else {
       this.energy+=amount
     }

@@ -16,6 +16,7 @@ class Input {
     this.down = false
     this.left = false
     this.right = false
+    this.dash = false
     this.gun = 'pipe'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
@@ -66,6 +67,9 @@ class Input {
     case 82:
       this.gun = 'lazer'
       break
+    case 32:
+      this.dash = true
+      break
     default:
       break
     }
@@ -98,6 +102,9 @@ class Input {
     case 83:
     case 115:
       this.down = false
+    case 32:
+      this.dash = false
+      break
     default:
       break
     }

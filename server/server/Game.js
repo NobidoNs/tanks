@@ -105,10 +105,14 @@ class Game {
         if (player.gun=='pipe') {
           const projectiles = player.getProjectilesFromShot(-1, 'pipeBullet')
           this.projectiles.push(...projectiles)
-        } else if (player.gun=='lazer') {
+        } else if (player.gun=='lazer' && player.energy>=Constants.LAZER_ENERGY) {
           const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
           this.projectiles.push(...projectiles)
+          player.energyAdd(-Constants.LAZER_ENERGY)
         }
+      }
+      if (data.dash && player.canDash()) {
+        player.doDash()
       }
     }
   }
@@ -131,7 +135,7 @@ class Game {
       // ...this.powerups
     ]
     // this.players.forEach(
-    //   entity => {console.log(Object.values(entity))})
+    //   entity => {console.log(entity.canDash())})
 
     entities.forEach(
       entity => { entity.update(this.lastUpdateTime, this.deltaTime) })
@@ -150,7 +154,7 @@ class Game {
         }
         if (e1 instanceof Player && e2 instanceof Bullet &&
           e2.source !== e1) {
-            console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
+            // console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
             if (e1.bulletCollidedPipe(e2,e1.turretAngle) && e1.gun=='collecter') {
               e1.energyAdd(e2.damage)
             } else {

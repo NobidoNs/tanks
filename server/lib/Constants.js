@@ -41,6 +41,9 @@ module.exports = {
   PLAYER_TURN_RATE: 0.005,
   PLAYER_DEFAULT_SPEED: 0.9,
   PLAYER_SHOT_COOLDOWN: 800,
+  PLAYER_DASH_COOLDOWN: 8000,
+  PLAYER_DASH_DURATION: 100,
+  PLAYER_DASH_SPEED: 400,
   PLAYER_DEFAULT_HITBOX_SIZE: 20,
   PLAYER_SHIELD_HITBOX_SIZE: 45,
   PLAYER_MAX_HEALTH: 100,
@@ -74,5 +77,7 @@ module.exports = {
     rapidfire: { MIN: 2, MAX: 4 },
     speedboost: { MIN: 1.2, MAX: 1.8 },
     shield: { MIN: 1, MAX: 4 }
-  }
+  },
+
+  LAZER_ENERGY:5
 }
