@@ -144,20 +144,67 @@ input[type=text] {
 #leaderboard-container {
   position: fixed;
   // display: block;
+  pointer-events: none;
   width: 15%;
   height: 30%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(89, 0, 255, 0.1);
-  z-index: 20;
+  background-color: rgba(89, 0, 255, 0.2);
+  z-index: 2;
   cursor: crosshair;
   user-select: none;
   text-align: center;
+  color: #64ff76;
   font-weight:600;
   padding: 10px;
   margin:10px 5px; // add top and bottom margin
   border-radius:10px;
   box-shadow: 5px 5px 8px rgba(89, 0, 255, 0.1);
+}
+
+#spels-container {
+  position: fixed;
+  // display: block;
+  pointer-events: none;
+  width: 30%;
+  height: 6%;
+  top: 80%;
+  left: 35%;
+  bottom: 0;
+  background-color: rgba(200, 0, 255, 0.1);
+  z-index: 2;
+  cursor: crosshair;
+  user-select: none;
+  // text-align: center;
+  font-weight:600;
+  padding: 15px;
+  margin:5px 5px; // add top and bottom margin
+  border-radius:10px;
+  box-shadow: 5px 5px 8px rgba(208, 0, 255, 0.1);
+}
+
+#dash-img {
+  float:left;
+  width: 50px;
+}
+
+#spels-container {
+  position: fixed;
+  // display: block;
+  pointer-events: none;
+  width: 30%;
+  height: 7%;
+  top: 80%;
+  left: 35%;
+  bottom: 0;
+  z-index: 2;
+  cursor: crosshair;
+  user-select: none;
+  // text-align: center;
+  font-weight:600;
+  padding: 15px;
+  margin:5px 5px; // add top and bottom margin
+  border-radius:10px;
 }

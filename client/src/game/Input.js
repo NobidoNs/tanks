@@ -138,6 +138,7 @@ class Input {
   onMouseMove(event) {
     this.mouseCoords = [event.offsetX, event.offsetY]
     // console.log(this.mouseCoords)
+    // console.log([event.clientX, event.clientY])
   }
 
   /**

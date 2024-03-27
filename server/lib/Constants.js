@@ -22,12 +22,12 @@ module.exports = {
   DRAWING_IMG_SHIELD: 'shield',
   DRAWING_IMG_PIPE_BULLET: 'pipe_bullet',
   DRAWING_IMG_LAZER_BULLET: 'lazer_bullet',
-  DRAWING_IMG_TILE: 'tile',
+  DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
     'self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
-    'pipe_bullet', 'lazer_bullet', 'tile'
+    'pipe_bullet', 'lazer_bullet', 'hexaTile'
   ],
-  DRAWING_TILE_SIZE: 90,
+  DRAWING_TILE_SIZE: 364,
 
   VIEWPORT_STICKINESS: 0.004,
 
