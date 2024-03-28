@@ -111,6 +111,10 @@ class Game {
           const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
           this.projectiles.push(...projectiles)
           player.energyAdd(-Constants.LAZER_ENERGY)
+        } else if (player.gun=='illusion' && player.energy>=Constants.ILLUSION_ENERGY) {
+          const projectiles = player.getProjectilesFromShot(-1, 'illusionBullet')
+          this.projectiles.push(...projectiles)
+          player.energyAdd(-Constants.ILLUSION_ENERGY)
         }
       }
       if (data.dash && player.canDash()) {
@@ -125,7 +129,7 @@ class Game {
       player => {
         if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
           player.lastBadBulletSummon = curTime
-          player.deltaSummon = Util.randRangeInt(2000, 4000)
+          player.deltaSummon = Util.randRangeInt(20000, 40000)
           const projectiles = Bullet.summonBadBullet(player, 'badBullet')
           this.projectiles.push(...projectiles)
         }
@@ -171,7 +175,14 @@ class Game {
         if (e1 instanceof Player && e2 instanceof Bullet &&
           (e2.source !== e1 || e2.type == 'badBullet')) {
             // console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
-            if (e1.bulletCollidedPipe(e2,e1.turretAngle) && e1.gun=='collecter') {
+            let reverse = false
+            if (e2.type=='illusionBullet') {
+              reverse = true
+            } else {
+              reverse = false
+            }
+            // console.log(reverse, e2.type)
+            if (e1.bulletCollidedPipe(e2,e1.turretAngle, reverse) && e1.gun=='collecter') {
               e1.energyAdd(e2.damage)
             } else {
               e1.damage(e2.damage)

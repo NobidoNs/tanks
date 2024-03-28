@@ -150,6 +150,9 @@ class Drawing {
     case "badBullet":
       img = Constants.DRAWING_IMG_BAD_BULLET
       break
+    case "illusionBullet":
+      img = Constants.DRAWING_IMG_ILLUSION_BULLET
+      break
     }
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(bullet.position)

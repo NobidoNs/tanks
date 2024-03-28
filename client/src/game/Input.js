@@ -67,6 +67,9 @@ class Input {
     case 82:
       this.gun = 'lazer'
       break
+    case 70:
+      this.gun = 'illusion'
+      break
     case 32:
       this.dash = true
       break

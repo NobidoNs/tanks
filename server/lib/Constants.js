@@ -22,11 +22,12 @@ module.exports = {
   DRAWING_IMG_SHIELD: 'shield',
   DRAWING_IMG_PIPE_BULLET: 'pipe_bullet',
   DRAWING_IMG_BAD_BULLET: 'badBullet',
+  DRAWING_IMG_ILLUSION_BULLET: 'illusionBullet',
   DRAWING_IMG_LAZER_BULLET: 'lazer_bullet',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
     'self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
-    'pipe_bullet', 'lazer_bullet', 'hexaTile', 'badBullet'
+    'pipe_bullet', 'lazer_bullet', 'hexaTile', 'badBullet', 'illusionBullet'
   ],
   DRAWING_TILE_SIZE: 364,
 
@@ -49,7 +50,7 @@ module.exports = {
   PLAYER_SHIELD_HITBOX_SIZE: 45,
   PLAYER_MAX_HEALTH: 100,
   PLAYER_MAX_ENERGY: 100,
-  PLAYER_START_ENERGY: 0,
+  PLAYER_START_ENERGY: 10,
 
   BULLET_DEFAULT_DAMAGE: 5,
   BULLET_SPEED: 2,
@@ -80,5 +81,6 @@ module.exports = {
     shield: { MIN: 1, MAX: 4 }
   },
 
-  LAZER_ENERGY:5
+  LAZER_ENERGY:5,
+  ILLUSION_ENERGY:5
 }

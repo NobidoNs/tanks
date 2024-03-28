@@ -37,7 +37,7 @@ class Entity {
       minDistance * minDistance
   }
 
-  bulletCollidedPipe(other, turretAngel) {
+  bulletCollidedPipe(other, turretAngel, reverse) {
     // console.log(other)
     // console.log(other.position.x)
     const vx=other.position.x-this.position.x
@@ -47,8 +47,12 @@ class Entity {
       angle+=2*Math.PI}
     // console.log(vx,vy)
     // console.log(angle)
-    // console.log(turretAngel)
-    if (Math.abs(angle-turretAngel)<=1) {return true}
+    // console.log(Math.abs(angle-turretAngel-Math.PI))
+    if (reverse==false) {
+      if (Math.abs(angle-turretAngel)<=1) {return true}
+    } else {
+      if (Math.abs(angle-turretAngel-Math.PI)>=6) {return true}
+    }
     return false
   }
 
