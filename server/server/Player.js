@@ -45,6 +45,8 @@ class Player extends Entity {
     this.dash = false
     this.dashCooldown = Constants.PLAYER_DASH_COOLDOWN
     this.lastDashTime = 0
+    this.lastBadBulletSummon = 0
+    this.deltaSummon = 0
 
     this.powerups = {}
 
@@ -98,7 +100,7 @@ class Player extends Entity {
    * @param {number} lastUpdateTime The last timestamp an update occurred
    * @param {number} deltaTime The timestep to compute the update with
    */
-  update(lastUpdateTime, deltaTime, dash=false) {
+  update(lastUpdateTime, deltaTime) {
     this.lastUpdateTime = lastUpdateTime
     this.position.add(Vector.scale(this.velocity, deltaTime))
     // if (dash) {this.position.add(Vector.scale(this.velocity, 40))}
@@ -106,7 +108,6 @@ class Player extends Entity {
     this.boundToWorld()
     this.tankAngle = Util.normalizeAngle(
       this.tankAngle + this.turnRate * deltaTime)
-
     this.updatePowerups()
   }
 

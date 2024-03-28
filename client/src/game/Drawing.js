@@ -146,6 +146,10 @@ class Drawing {
       break
     case "lazerBullet":
       img = Constants.DRAWING_IMG_LAZER_BULLET
+      break
+    case "badBullet":
+      img = Constants.DRAWING_IMG_BAD_BULLET
+      break
     }
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(bullet.position)

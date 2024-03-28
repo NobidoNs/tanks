@@ -8,6 +8,7 @@ const Bullet = require('./Bullet')
 const Player = require('./Player')
 const Powerup = require('./Powerup')
 
+const Util = require('../lib/Util')
 const Constants = require('../lib/Constants')
 
 /**
@@ -31,6 +32,7 @@ class Game {
     this.projectiles = []
     this.powerups = []
 
+    this.lastSummonTime = 0
     this.lastUpdateTime = 0
     this.deltaTime = 0
   }
@@ -117,6 +119,20 @@ class Game {
     }
   }
 
+  badBullets(curTime) {
+    // console.log(this.players)
+    this.players.forEach(
+      player => {
+        if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
+          player.lastBadBulletSummon = curTime
+          player.deltaSummon = Util.randRangeInt(2000, 4000)
+          const projectiles = Bullet.summonBadBullet(player, 'badBullet')
+          this.projectiles.push(...projectiles)
+        }
+      }
+    )
+  }
+
   /**
    * Updates the state of all the objects in the game.
    */
@@ -124,7 +140,7 @@ class Game {
     const currentTime = Date.now()
     this.deltaTime = currentTime - this.lastUpdateTime
     this.lastUpdateTime = currentTime
-
+    this.badBullets(currentTime)
     /**
      * Perform a physics update and collision update for all entities
      * that need it.
@@ -135,7 +151,7 @@ class Game {
       // ...this.powerups
     ]
     // this.players.forEach(
-    //   entity => {console.log(entity.canDash())})
+    //   entity => {console.log(entity)})
 
     entities.forEach(
       entity => { entity.update(this.lastUpdateTime, this.deltaTime) })
@@ -153,7 +169,7 @@ class Game {
           e2 = entities[i]
         }
         if (e1 instanceof Player && e2 instanceof Bullet &&
-          e2.source !== e1) {
+          (e2.source !== e1 || e2.type == 'badBullet')) {
             // console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
             if (e1.bulletCollidedPipe(e2,e1.turretAngle) && e1.gun=='collecter') {
               e1.energyAdd(e2.damage)

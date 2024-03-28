@@ -9,7 +9,7 @@ module.exports = {
   WORLD_PADDING: 30,
 
   DRAWING_NAME_FONT: '18px Helvetica',
-  DRAWING_NAME_COLOR: 'light_blue',
+  DRAWING_NAME_COLOR: 'lightBlue',
   DRAWING_HP_COLOR: 'red',
   DRAWING_HP_MISSING_COLOR: 'grey',
   DRAWING_ENERGY_COLOR: 'blue',
@@ -21,11 +21,12 @@ module.exports = {
   DRAWING_IMG_OTHER_TURRET: 'other_turret',
   DRAWING_IMG_SHIELD: 'shield',
   DRAWING_IMG_PIPE_BULLET: 'pipe_bullet',
+  DRAWING_IMG_BAD_BULLET: 'badBullet',
   DRAWING_IMG_LAZER_BULLET: 'lazer_bullet',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
     'self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
-    'pipe_bullet', 'lazer_bullet', 'hexaTile'
+    'pipe_bullet', 'lazer_bullet', 'hexaTile', 'badBullet'
   ],
   DRAWING_TILE_SIZE: 364,
 

@@ -6,6 +6,7 @@
 const Constants = require('../lib/Constants')
 const Entity = require('../lib/Entity')
 const Vector = require('../lib/Vector')
+const Util = require('../lib/Util')
 
 /**
  * Bullet class.
@@ -41,6 +42,7 @@ class Bullet extends Entity {
    */
   static createFromPlayer(player, angleDeviation = 0, velocity, type) {
     const angle = player.turretAngle + angleDeviation
+    // console.log(player.position)
     return new Bullet(
       player.position.copy(),
       Vector.fromPolar(Constants.BULLET_SPEED+velocity, angle),
@@ -62,6 +64,29 @@ class Bullet extends Entity {
     if (this.inWorld() || distanceStep > Bullet.MAX_TRAVEL_DISTANCE_SQ) {
       this.destroyed = true
     }
+  }
+
+  static summonBadBullet(player, type) {
+    let x = Util.randRangeInt(50,500)
+    let y = Util.randRangeInt(50,500)
+    if (Util.randRangeInt(1,3) == 1) {x*=-1}
+    if (Util.randRangeInt(1,3) == 1) {y*=-1}
+    const inWorldX = player['position']['x']-x
+    const inWorldY = player['position']['y']-y
+    const vel = Util.randRange(0.5,1.5)
+    // const vel = 0
+    const angle = Math.atan2(y, x)
+    // console.log(Util.randRangeInt(1,3))
+    // console.log(angle, x, y)
+    return [
+      new Bullet(
+      Vector.fromArray([inWorldX,inWorldY]),
+      Vector.fromPolar(vel, angle),
+      angle,
+      player,
+      type
+      )
+    ]
   }
 }
 
