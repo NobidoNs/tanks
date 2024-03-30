@@ -43,6 +43,8 @@ class Player extends Entity {
     this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
     this.gun = ''
     this.dash = false
+    this.invis = false
+    this.startCasteTime = 0
     this.dashCooldown = Constants.PLAYER_DASH_COOLDOWN
     this.lastDashTime = 0
     this.lastBadBulletSummon = 0
@@ -116,6 +118,16 @@ class Player extends Entity {
       this.position.add(Vector.fromPolar(Constants.PLAYER_DASH_SPEED, this.tankAngle))
     }
     this.lastDashTime = this.lastUpdateTime
+  }
+
+  doInvis(fl) {
+    if (fl == true && this.invis == false) {
+      this.startCasteTime = this.lastUpdateTime
+      this.invis=true
+    } else if (fl == false) {
+      this.startCasteTime = 0
+      this.invis=false
+    }
   }
 
   /**

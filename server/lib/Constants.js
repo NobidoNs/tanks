@@ -15,7 +15,8 @@ module.exports = {
   DRAWING_ENERGY_COLOR: 'blue',
   DRAWING_ENERGY_MISSING_COLOR: 'grey',
   DRAWING_IMG_BASE_PATH: 'img',
-  DRAWING_IMG_SELF_TANK: 'self_tank',
+  DRAWING_IMG_SELF_TANK: 'selfTank/self_tank',
+  DRAWING_IMG_SELF_COLLECT_TURRET: 'self_collect_turret',
   DRAWING_IMG_SELF_TURRET: 'self_turret',
   DRAWING_IMG_OTHER_TANK: 'other_tank',
   DRAWING_IMG_OTHER_TURRET: 'other_turret',
@@ -26,8 +27,9 @@ module.exports = {
   DRAWING_IMG_LAZER_BULLET: 'lazer_bullet',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
-    'self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
-    'pipe_bullet', 'lazer_bullet', 'hexaTile', 'badBullet', 'illusionBullet'
+    'selfTank/self_tank', 'self_turret', 'other_tank', 'other_turret', 'shield',
+    'pipe_bullet', 'lazer_bullet', 'hexaTile', 'badBullet', 'illusionBullet',
+    'self_collect_turret'
   ],
   DRAWING_TILE_SIZE: 364,
 
@@ -46,6 +48,7 @@ module.exports = {
   PLAYER_DASH_COOLDOWN: 8000,
   PLAYER_DASH_DURATION: 100,
   PLAYER_DASH_SPEED: 400,
+  PLAYER_INVIS_CASTE: 4000,
   PLAYER_DEFAULT_HITBOX_SIZE: 20,
   PLAYER_SHIELD_HITBOX_SIZE: 45,
   PLAYER_MAX_HEALTH: 100,
@@ -82,5 +85,11 @@ module.exports = {
   },
 
   LAZER_ENERGY:5,
-  ILLUSION_ENERGY:5
+  ILLUSION_ENERGY:5,
+  GUN_TYPES: {
+    'pipe': 'self_turret',
+    'collecter': 'self_collect_turret',
+    'lazer': 'self_turret',
+    'illusion': 'self_turret'
+  }
 }

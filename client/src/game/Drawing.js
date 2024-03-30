@@ -60,8 +60,11 @@ class Drawing {
    * Draws an image on the canvas at the centered at the origin.
    * @param {Image} image The image to draw on the canvas
    */
-  drawCenteredImage(image) {
+  drawCenteredImage(image, opacity=1) {
+    // console.log(opacity)
+    this.context.globalAlpha = opacity
     this.context.drawImage(image, -image.width / 2, -image.height / 2)
+    this.context.globalAlpha = 1
   }
 
   /**
@@ -80,6 +83,21 @@ class Drawing {
    */
   drawTank(isSelf, player) {
     // console.log(player)
+    let part = 1
+    if (player['invis']) {
+      // console.log(player['lastUpdateTime'],player['startCasteTime'])
+      const deltaTime = player['lastUpdateTime']-player['startCasteTime']
+      if (deltaTime>Constants.PLAYER_INVIS_CASTE) {
+        part = 10
+      } else if (deltaTime>Constants.PLAYER_INVIS_CASTE*3/4) {
+        part = 3
+      } else if (deltaTime>Constants.PLAYER_INVIS_CASTE*2/4) {
+        part = 2
+      } else if (deltaTime>Constants.PLAYER_INVIS_CASTE/4) {
+        part = 1
+      }
+    }
+
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(player.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
@@ -87,6 +105,7 @@ class Drawing {
     this.context.textAlign = 'center'
     this.context.font = Constants.DRAWING_NAME_FONT
     this.context.fillStyle = Constants.DRAWING_NAME_COLOR
+    this.context.globalAlpha = 1/part
     this.context.fillText(player.name, 0, -50)
 
     for (let i = 0; i < Constants.PLAYER_MAX_HEALTH; ++i) {
@@ -108,22 +127,22 @@ class Drawing {
     }
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
     // console.log(player.turretAngle)
+
     this.drawCenteredImage(this.images[
-      // eslint-disable-next-line multiline-ternary
-      isSelf ? Constants.DRAWING_IMG_SELF_TANK :
-        Constants.DRAWING_IMG_OTHER_TANK
-    ])
+      Constants.DRAWING_IMG_SELF_TANK
+    ], 1/part)
     this.context.rotate(-Drawing.translateAngle(player.tankAngle))
 
-    this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
+    this.context.rotate(Drawing.translateAngle(player.turretAngle))
     // this.context.fillStyle = Constants.DRAWING_HP_MISSING_COLOR
     // this.context.fillRect(0, -10, 40, 20)
     // this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
-    this.drawCenteredImage(this.images[
-      // eslint-disable-next-line multiline-ternary
-      isSelf ? Constants.DRAWING_IMG_SELF_TURRET :
-        Constants.DRAWING_IMG_OTHER_TURRET
-    ])
+
+    let turret = Constants.DRAWING_IMG_SELF_TURRET
+    Object.keys(Constants.GUN_TYPES).forEach(element => {
+      if (player.gun == element) {turret = Constants.GUN_TYPES[element]}
+    });
+    this.drawCenteredImage(this.images[turret], 1/part)
 
     if (player.powerups[Constants.POWERUP_SHIELD]) {
       this.context.rotate(-Drawing.translateAngle(-player.turretAngle))

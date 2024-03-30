@@ -141,7 +141,8 @@ class Game {
         shoot: this.input.mouseDown,
         turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI),
         gun: this.input.gun,
-        dash: this.input.dash
+        dash: this.input.dash,
+        invis: this.input.invis
       })
     }
   }

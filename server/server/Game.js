@@ -120,6 +120,14 @@ class Game {
       if (data.dash && player.canDash()) {
         player.doDash()
       }
+
+      if (data.invis && player.energy!=0) {
+          player.energyAdd(-0.01)
+          player.doInvis(true)
+      } else {
+        player.doInvis(false)
+      }
+  
     }
   }
 

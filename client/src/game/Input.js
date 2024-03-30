@@ -17,6 +17,7 @@ class Input {
     this.left = false
     this.right = false
     this.dash = false
+    this.invis = false
     this.gun = 'pipe'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
@@ -72,6 +73,11 @@ class Input {
       break
     case 32:
       this.dash = true
+      break
+    case 49:
+      if (this.invis == false) {
+        this.invis = true
+      }else {this.invis = false}
       break
     default:
       break
