@@ -160,7 +160,7 @@ class Game {
     const entities = [
       ...this.players.values(),
       ...this.projectiles,
-      // ...this.powerups
+      ...this.powerups
     ]
     // this.players.forEach(
     //   entity => {console.log(entity)})

@@ -70,14 +70,14 @@ module.exports = {
   POWERUP_SPEEDBOOST: 'speedboost',
   POWERUP_SHIELD: 'shield',
   POWERUP_KEYS: [
-    'healthpack',
-    'shotgun',
-    'rapidfire',
-    'speedboost',
-    'shield'
+    'healthpack'
+    // 'shotgun',
+    // 'rapidfire',
+    // 'speedboost',
+    // 'shield'
   ],
   POWERUP_DATA: {
-    healthpack: { MIN: 1, MAX: 4 },
+    healthpack: { MIN: 5, MAX: 10 },
     shotgun: { MIN: 1, MAX: 2 },
     rapidfire: { MIN: 2, MAX: 4 },
     speedboost: { MIN: 1.2, MAX: 1.8 },

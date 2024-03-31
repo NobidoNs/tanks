@@ -106,7 +106,7 @@ class Drawing {
     this.context.font = Constants.DRAWING_NAME_FONT
     this.context.fillStyle = Constants.DRAWING_NAME_COLOR
     this.context.globalAlpha = 1/part
-    this.context.fillText(player.name, 0, -50)
+    this.context.fillText(player.name, 0, -70)
 
     for (let i = 0; i < Constants.PLAYER_MAX_HEALTH; ++i) {
       if (i < player.health) {
@@ -114,7 +114,7 @@ class Drawing {
       } else {
         this.context.fillStyle = Constants.DRAWING_HP_MISSING_COLOR
       }
-      this.context.fillRect(-35 + 0.7 * i, -40, 0.7, 4)
+      this.context.fillRect(-35 + 0.7 * i, -60, 0.7, 4)
     }
 
     for (let i = 0; i < Constants.PLAYER_MAX_ENERGY; ++i) {
@@ -123,7 +123,7 @@ class Drawing {
       } else {
         this.context.fillStyle = Constants.DRAWING_ENERGY_MISSING_COLOR
       }
-      this.context.fillRect(-35 + 0.7 * i, -30, 0.7, 4)
+      this.context.fillRect(-35 + 0.7 * i, -50, 0.7, 4)
     }
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
     // console.log(player.turretAngle)
