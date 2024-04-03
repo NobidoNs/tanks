@@ -15,7 +15,7 @@ const Game = require('./game/Game')
 
 $(document).ready(() => {
   const socket = io('http://localhost:5000')
-  const game = Game.create(socket, 'canvas', 'leaderboard')
+  const game = Game.create(socket, 'canvas', 'leaderboard', 'talantTree')
   Chat.create(socket, 'chat-display', 'chat-input')
 
   $('#name-input').focus()

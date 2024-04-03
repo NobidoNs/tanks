@@ -17,6 +17,7 @@ class Input {
     this.left = false
     this.right = false
     this.dash = false
+    this.talantTree = false
     this.invis = false
     this.gun = 'pipe'
     this.mouseDown = false
@@ -31,9 +32,9 @@ class Input {
    *   relative to
    * @return {Input}
    */
-  static create(keyElement, mouseMoveElement) {
+  static create(keyElement, mouseMoveElement, mouseMove2) {
     const input = new Input()
-    input.applyEventHandlers(keyElement, keyElement, mouseMoveElement)
+    input.applyEventHandlers(keyElement, keyElement, mouseMoveElement, mouseMove2)
     return input
   }
 
@@ -79,6 +80,9 @@ class Input {
         this.invis = true
       }else {this.invis = false}
       break
+    case 16:
+      this.talantTree = true
+      break
     default:
       break
     }
@@ -114,6 +118,9 @@ class Input {
     case 32:
       this.dash = false
       break
+    case 16:
+      this.talantTree = false
+      break
     default:
       break
     }
@@ -145,7 +152,7 @@ class Input {
    * @param {Event} event The event passed to the event handler
    */
   onMouseMove(event) {
-    this.mouseCoords = [event.offsetX, event.offsetY]
+    this.mouseCoords = [event.clientX, event.clientY]
     // console.log(this.mouseCoords)
     // console.log([event.clientX, event.clientY])
   }
@@ -157,13 +164,15 @@ class Input {
    * @param {Element} mouseMoveElement The element to track mouse movement
    *   relative to
    */
-  applyEventHandlers(keyElement, mouseClickElement, mouseMoveElement) {
+  applyEventHandlers(keyElement, mouseClickElement, mouseMoveElement, mouseMove2) {
     keyElement.addEventListener('keydown', this.onKeyDown.bind(this))
     keyElement.addEventListener('keyup', this.onKeyUp.bind(this))
     mouseClickElement.addEventListener('mousedown', this.onMouseDown.bind(this))
     mouseClickElement.addEventListener('mouseup', this.onMouseUp.bind(this))
     mouseMoveElement.setAttribute('tabindex', 1)
     mouseMoveElement.addEventListener('mousemove', this.onMouseMove.bind(this))
+    mouseMove2.setAttribute('tabindex', 1)
+    mouseMove2.addEventListener('mousemove', this.onMouseMove.bind(this))
   }
 }
 

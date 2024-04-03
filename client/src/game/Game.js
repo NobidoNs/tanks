@@ -4,10 +4,13 @@
  * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
+const $ = require('jquery')
+
 const Drawing = require('./Drawing')
 const Input = require('./Input')
 const Leaderboard = require('./Leaderboard')
 const Viewport = require('./Viewport')
+const Table = require('./table')
 
 const Constants = require('lib/Constants')
 const Vector = require('lib/Vector')
@@ -55,18 +58,21 @@ class Game {
    *   hold the leaderboard
    * @return {Game}
    */
-  static create(socket, canvasElementID, leaderboardElementID) {
+  static create(socket, canvasElementID, leaderboardElementID, talantTreeID) {
     const canvas = document.getElementById(canvasElementID)
+    const talantTree = document.getElementById(talantTreeID)
     canvas.width = window.screen.width
     // screen.height return bad answer (9.2 is pick coefficent)
     canvas.height = window.screen.height-window.screen.height/9.2 
+
+    Table.generateTable()
 
     // console.log(canvas)
     // console.log(window.screen.height, window.screen.width)
 
     const viewport = Viewport.create(canvas)
     const drawing = Drawing.create(canvas, viewport)
-    const input = Input.create(document, canvas)
+    const input = Input.create(document, canvas, talantTree)
 
     const leaderboard = Leaderboard.create(leaderboardElementID)
     const cooldowns = Cooldown.create()
@@ -127,18 +133,20 @@ class Game {
       this.viewport.update(this.deltaTime)
       let absoluteMouseCoords = this.viewport.toWorld(
         Vector.fromArray(this.input.mouseCoords))
-      // absoluteMouseCoords['y']+=45
-      // absoluteMouseCoords['x']+=125
       const playerToMouseVector = Vector.sub(this.self.position,
         absoluteMouseCoords)
-      // console.log(this.input.gun)
+      
+      Table.update(this.input.talantTree)
+      
+      let shoot = this.input.mouseDown
+      if (this.input.talantTree) {shoot = false}
 
       this.socket.emit(Constants.SOCKET_PLAYER_ACTION, {
         up: this.input.up,
         down: this.input.down,
         left: this.input.left,
         right: this.input.right,
-        shoot: this.input.mouseDown,
+        shoot: shoot,
         turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI),
         gun: this.input.gun,
         dash: this.input.dash,
@@ -156,14 +164,12 @@ class Game {
 
       this.drawing.drawTiles()
 
-      // this.projectiles.forEach(bullet => {console.log(bullet.type)})
       this.projectiles.forEach(this.drawing.drawBullet.bind(this.drawing))
 
       this.powerups.forEach(this.drawing.drawPowerup.bind(this.drawing))
 
       this.players.forEach(tank => {if (tank.socketID!=this.self.socketID) {this.drawing.drawTank(false, tank)}})
-      // this.players.forEach(tank => console.log(tank))
-      // console.log(this.self.turretAngle)
+
       this.drawing.drawTank(true, this.self)
     }
   }
