@@ -173,6 +173,11 @@ class Game {
       this.drawing.drawTank(true, this.self)
     }
   }
+
+  learn(row, col) {
+    console.log(row,col)
+    return 0
+  }
 }
 
 module.exports = Game

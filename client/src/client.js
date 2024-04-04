@@ -12,11 +12,14 @@ const io = require('socket.io-client')
 
 const Chat = require('./game/Chat')
 const Game = require('./game/Game')
+let ready = false
+let game = ''
 
 $(document).ready(() => {
   const socket = io('http://localhost:5000')
-  const game = Game.create(socket, 'canvas', 'leaderboard', 'talantTree')
+  game = Game.create(socket, 'canvas', 'leaderboard', 'talantTree')
   Chat.create(socket, 'chat-display', 'chat-input')
+  ready = true
 
   $('#name-input').focus()
 
@@ -52,4 +55,8 @@ $(document).ready(() => {
   // }
   // $('#name-form').submit(sendName)
   // $('#name-submit').click(sendName)
+
+  window.learn = function(row,col) {
+    game.learn(row,col)
+  }
 })
