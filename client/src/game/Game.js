@@ -43,6 +43,7 @@ class Game {
     this.players = []
     this.projectiles = []
     this.powerups = []
+    this.desired = []
 
     this.animationFrameId = null
     this.lastUpdateTime = 0
@@ -150,9 +151,14 @@ class Game {
         turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI),
         gun: this.input.gun,
         dash: this.input.dash,
-        invis: this.input.invis
+        invis: this.input.invis,
+        desired: this.desired
       })
     }
+  }
+
+  learn(row, col) {
+    this.desired = [row, col]
   }
 
   /**
@@ -172,11 +178,6 @@ class Game {
 
       this.drawing.drawTank(true, this.self)
     }
-  }
-
-  learn(row, col) {
-    console.log(row,col)
-    return 0
   }
 }
 

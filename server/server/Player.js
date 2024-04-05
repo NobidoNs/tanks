@@ -5,6 +5,7 @@
  */
 
 const Bullet = require('./Bullet')
+const TalantTree = require('./talantTree')
 const Powerup = require('./Powerup')
 
 const Constants = require('../lib/Constants')
@@ -30,27 +31,32 @@ class Player extends Entity {
 
     this.name = name
     this.socketID = socketID
-
-    this.lastUpdateTime = 0
+  
     this.tankAngle = 0
     this.turretAngle = 0
     this.turnRate = 0
     this.speed = Constants.PLAYER_DEFAULT_SPEED
-    this.shotCooldown = Constants.PLAYER_SHOT_COOLDOWN
-    this.lastShotTime = 0
-    this.health = Constants.PLAYER_MAX_HEALTH
-    this.energy = Constants.PLAYER_START_ENERGY
-    this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
-    this.gun = ''
-    this.dash = false
-    this.invis = false
-    this.startCasteTime = 0
+
     this.dashCooldown = Constants.PLAYER_DASH_COOLDOWN
+    this.shotCooldown = Constants.PLAYER_SHOT_COOLDOWN
+    this.lastUpdateTime = 0
+    this.lastShotTime = 0
+    this.startCasteTime = 0
     this.lastDashTime = 0
     this.lastBadBulletSummon = 0
     this.deltaSummon = 0
 
+    this.health = Constants.PLAYER_MAX_HEALTH
+    this.energy = Constants.PLAYER_START_ENERGY
+    this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
+    this.gun = ''
+
+    this.dash = false
+    this.invis = false
+
+    this.desired = []
     this.powerups = {}
+    this.talants = new TalantTree()
 
     this.kills = 0
     this.deaths = 0
@@ -128,6 +134,17 @@ class Player extends Entity {
       this.startCasteTime = 0
       this.invis=false
     }
+  }
+
+  unlockSpell(spellName) {
+      const result = this.talants.unlock(spellName)
+      console.log(result)
+      // if (result == false) {
+      //   return false
+      // } else {
+      //   this.talants = result
+      //   return true
+      // }
   }
 
   /**

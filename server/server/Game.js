@@ -5,6 +5,7 @@
  */
 
 const Bullet = require('./Bullet')
+const TalantTree = require('./talantTree')
 const Player = require('./Player')
 const Powerup = require('./Powerup')
 
@@ -127,7 +128,7 @@ class Game {
       } else {
         player.doInvis(false)
       }
-  
+      if (data.desired != []) {player.unlockSpell('illusion')}
     }
   }
 
