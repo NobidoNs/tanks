@@ -12,24 +12,27 @@ class TalantTree {
 
         dash:[{}, false, 10],
         invis:[{}, false, 10]
-        }]
-      }, true, 0]
+        }, true, 0]
+      }]
   }
 
-  unlock(spellName, TT=this.talantTree[0]) {
-    const vals = Object.values(TT)[0]
+  unlock(spellName, TT=this.talantTree[0], parent='collecter') {
     try {
-      if (vals.length==0) {return [false]}
+      if (Object.keys(TT).length==0) {return [false]}
     } catch (e) {return [false]}
-    // console.log(TT)
-    vals.forEach(element => {
-      if (element == spellName) {return true, parent}
-      const ret = this.unlock(spellName, element)
-      if (ret[0] == true) {return [true, ret[1]]}
-      const parent = element
-      // this.unlock(spellName)
+    const keys = Object.keys(TT)
+    try {
+      if (keys.length==0) {return [false]}
+    } catch (e) {return [false]}
+
+    for (const element of keys) {
       // console.log(element)
-    });
+      if (element == spellName) {
+        return [TT[element][1], parent, true]
+      }
+      const ret = this.unlock(spellName, TT[element][0], element)
+      if (ret[2] == true) {return [TT[element][1], ret[1], true]}
+    };
     return [false]
   }
 }
