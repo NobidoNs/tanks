@@ -122,13 +122,13 @@ class Game {
         player.doDash()
       }
 
-      if (data.invis && player.energy!=0) {
+      if (data.invis && player.canInvis()) {
           player.energyAdd(-0.01)
           player.doInvis(true)
       } else {
         player.doInvis(false)
       }
-      if (data.desired != []) {player.unlockSpell('illusion')}
+      if (data.desired != []) {player.unlockSpell(data.desired)}
     }
   }
 

@@ -136,15 +136,15 @@ class Player extends Entity {
     }
   }
 
-  unlockSpell(spellName) {
-      const result = this.talants.unlock(spellName)
-      console.log(result)
-      // if (result == false) {
-      //   return false
-      // } else {
-      //   this.talants = result
-      //   return true
-      // }
+  unlockSpell(address) {
+    const price = Constants.PRICES[this.talants.getName(address)]
+    if (price <= this.energy) {
+      const result = this.talants.unlock(address)
+      if (result == true) {
+        this.energyAdd(-price)
+        console.log(price)
+      }
+    }
   }
 
   /**
@@ -217,7 +217,12 @@ class Player extends Entity {
   }
 
   canDash() {
-    return this.lastUpdateTime > this.lastDashTime + this.dashCooldown
+    return this.lastUpdateTime > this.lastDashTime + this.dashCooldown && 
+    this.talants.canDash()
+  }
+
+  canInvis() {
+    return player.energy!=0 && this.talants.canInvis()
   }
 
   /**

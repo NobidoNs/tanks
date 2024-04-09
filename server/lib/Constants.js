@@ -91,5 +91,13 @@ module.exports = {
     'collecter': 'self_collect_turret',
     'lazer': 'self_turret',
     'illusion': 'self_turret'
+  },
+  PRICES:{
+    'pipe': 5,
+    'collecter': 0,
+    'lazer': 20,
+    'illusion': 20,
+    'dash': 10,
+    'invis': 10
   }
 }

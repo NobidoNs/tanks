@@ -9,12 +9,12 @@ class Table {
     const tbl = $(`#talantTree`)
     let tblBody = ''
     // creating all cells
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 11; i++) {
       // creates a table row
       // const row = document.createElement("tr");
       let row = '<tr>'
       let td = ''
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < 15; j++) {
         // const cell = document.createElement("td");
         // td.setAttribute()
         // console.log(cell)
