@@ -53,6 +53,7 @@ class Player extends Entity {
 
     this.dash = false
     this.invis = false
+    this.updateTable = [false]
 
     this.desired = []
     this.powerups = {}
@@ -79,7 +80,6 @@ class Player extends Entity {
    * @param {Object} data A JSON Object storing the input state
    */
   updateOnInput(data) {
-    // console.log(Constants.PLAYER_TURN_RATE)
     if (data.up) {
       this.velocity = Vector.fromPolar(this.speed, this.tankAngle)
     } else if (data.down) {
@@ -96,8 +96,9 @@ class Player extends Entity {
       this.turnRate = 0
     }
 
-    // console.log(data.gun)
-    this.gun = data.gun
+    if (this.talants.talantTree[data.gun]['access'] == true) {
+      this.gun = data.gun
+    }
     this.dash = data.dash
 
     this.turretAngle = data.turretAngle
@@ -109,10 +110,10 @@ class Player extends Entity {
    * @param {number} deltaTime The timestep to compute the update with
    */
   update(lastUpdateTime, deltaTime) {
+    // this.updateTable = [false]
     this.lastUpdateTime = lastUpdateTime
     this.position.add(Vector.scale(this.velocity, deltaTime))
     // if (dash) {this.position.add(Vector.scale(this.velocity, 40))}
-    // console.log(deltaTime)
     this.boundToWorld()
     this.tankAngle = Util.normalizeAngle(
       this.tankAngle + this.turnRate * deltaTime)
@@ -141,8 +142,8 @@ class Player extends Entity {
     if (price <= this.energy) {
       const result = this.talants.unlock(address)
       if (result == true) {
+        this.updateTable = [true, address]
         this.energyAdd(-price)
-        console.log(price)
       }
     }
   }
@@ -222,7 +223,7 @@ class Player extends Entity {
   }
 
   canInvis() {
-    return player.energy!=0 && this.talants.canInvis()
+    return this.energy!=0 && this.talants.canInvis()
   }
 
   /**

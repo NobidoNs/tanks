@@ -30,9 +30,11 @@ class Game {
    * @param {Leaderboard} leaderboard The Leaderboard object handling the
    *   leaderboard update
    */
-  constructor(socket, viewport, drawing, input, leaderboard, cooldowns) {
+  constructor(socket, viewport, drawing, input, leaderboard, cooldowns, table) {
     this.socket = socket
 
+    this.tb = table
+    this.tb.generateTable()
     this.viewport = viewport
     this.drawing = drawing
     this.input = input
@@ -48,6 +50,8 @@ class Game {
     this.animationFrameId = null
     this.lastUpdateTime = 0
     this.deltaTime = 0
+
+    this.updateTable = false
   }
 
   /**
@@ -66,8 +70,6 @@ class Game {
     // screen.height return bad answer (9.2 is pick coefficent)
     canvas.height = window.screen.height-window.screen.height/9.2 
 
-    Table.generateTable()
-
     // console.log(canvas)
     // console.log(window.screen.height, window.screen.width)
 
@@ -77,8 +79,9 @@ class Game {
 
     const leaderboard = Leaderboard.create(leaderboardElementID)
     const cooldowns = Cooldown.create()
+    const table = new Table
 
-    const game = new Game(socket, viewport, drawing, input, leaderboard, cooldowns)
+    const game = new Game(socket, viewport, drawing, input, leaderboard, cooldowns, table)
     game.init()
     return game
   }
@@ -101,6 +104,7 @@ class Game {
     this.players = state.players
     this.projectiles = state.projectiles
     this.powerups = state.powerups
+    this.updateTable = state.self.updateTable
     this.viewport.updateTrackingPosition(state.self)
     this.leaderboard.update(state.players)
     this.cooldowns.update(state.players)
@@ -137,7 +141,7 @@ class Game {
       const playerToMouseVector = Vector.sub(this.self.position,
         absoluteMouseCoords)
       
-      Table.update(this.input.talantTree)
+      this.tb.update(this.input.talantTree, this.updateTable)
       
       let shoot = this.input.mouseDown
       if (this.input.talantTree) {shoot = false}

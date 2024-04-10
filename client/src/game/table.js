@@ -2,51 +2,45 @@ const $ = require('jquery')
 class Table {
   constructor(container) {
     this.container = container
+    this.rows = 11
+    this.cols = 15
   }
 
-  static generateTable() {
+  generateTable() {
     // creates a <table> element and a <tbody> element
     const tbl = $(`#talantTree`)
     let tblBody = ''
-    // creating all cells
-    for (let i = 0; i < 11; i++) {
-      // creates a table row
-      // const row = document.createElement("tr");
+
+    for (let i = 0; i < this.rows; i++) {
       let row = '<tr>'
       let td = ''
-      for (let j = 0; j < 15; j++) {
-        // const cell = document.createElement("td");
-        // td.setAttribute()
-        // console.log(cell)
-
+      for (let j = 0; j < this.cols; j++) {
         td = `<td onclick="learn(${j},${i})"></td>`;
-
-        // const cellText = document.createTextNode(`cell in row ${i}, column ${j}`);
-        // const onclick = document.
-        // cell.appendChild(cellText);
-        // row.append(cell);
         row+=td
       }
       row += '</tr>'
       // add the row to the end of the table body
-      // tblBody.append(row);
       tblBody += row
     }
-    // // put the <tbody> in the <table>
-    // tbl.append(tblBody);
-    // // appends <table> into <body>
-    // document.body.append(tbl);
-    // // sets the border attribute of tbl to '2'
-    // tbl.setAttribute("border", "2");
-    // console.log(tbl)
     tbl.html(tblBody)
     return tbl
   }
 
-  static update(show) {
+  update(show, updateTable=[false]) {
+    if (updateTable[0]) {this.changeCl(updateTable[1], 'rgba(0, 236, 194, 0.7)')}
     if (show) {
       $('#talantTree').show()
     } else {$('#talantTree').hide()}
+  }
+
+  changeCl(xy,color) {
+    const x = xy[0]
+    const y = xy[1]
+    const cels = $("td");
+    const n = y * this.cols + x
+    const el = cels[n]
+    console.log(n)
+    $(el).css('background-color', 'blue');
   }
 }
 module.exports = Table

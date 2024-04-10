@@ -19,7 +19,7 @@ class Input {
     this.dash = false
     this.talantTree = false
     this.invis = false
-    this.gun = 'pipe'
+    this.gun = 'collecter'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
   }
