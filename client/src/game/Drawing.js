@@ -61,7 +61,7 @@ class Drawing {
    * @param {Image} image The image to draw on the canvas
    */
   drawCenteredImage(image, opacity=1) {
-    // console.log(opacity)
+    // console.log(image)
     this.context.globalAlpha = opacity
     this.context.drawImage(image, -image.width / 2, -image.height / 2)
     this.context.globalAlpha = 1
@@ -126,8 +126,8 @@ class Drawing {
       this.context.fillRect(-35 + 0.7 * i, -50, 0.7, 4)
     }
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
-    // console.log(player.turretAngle)
 
+    // console.log(this.images)
     this.drawCenteredImage(this.images[
       Constants.DRAWING_IMG_SELF_TANK
     ], 1/part)
@@ -138,7 +138,7 @@ class Drawing {
     // this.context.fillRect(0, -10, 40, 20)
     // this.context.rotate(Drawing.translateAngle(player.turretAngle+Math.PI))
 
-    let turret = Constants.DRAWING_IMG_SELF_TURRET
+    let turret = Constants.DRAWING_IMG_TURRET
     Object.keys(Constants.GUN_TYPES).forEach(element => {
       if (player.gun == element) {turret = Constants.GUN_TYPES[element]}
     });

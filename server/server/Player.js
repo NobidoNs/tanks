@@ -54,6 +54,7 @@ class Player extends Entity {
     this.dash = false
     this.invis = false
     this.updateTable = [false]
+    this.imgs = []
 
     this.desired = []
     this.powerups = {}
@@ -72,6 +73,7 @@ class Player extends Entity {
   static create(name, socketID) {
     const player = new Player(name, socketID)
     player.spawn()
+    player.imgs = player.talants.getImgs()
     return player
   }
 

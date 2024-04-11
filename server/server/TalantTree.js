@@ -62,6 +62,10 @@ class TalantTree {
     }
   }
 
+  getImgs() {
+    return this.address
+  }
+
   unlock(address) {
     if (address != undefined && address.length != 0) {
       // console.log(address)

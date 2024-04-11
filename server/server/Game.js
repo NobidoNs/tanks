@@ -138,7 +138,7 @@ class Game {
       player => {
         if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
           player.lastBadBulletSummon = curTime
-          player.deltaSummon = Util.randRangeInt(20000, 40000)
+          player.deltaSummon = Util.randRangeInt(2000, 4000)
           const projectiles = Bullet.summonBadBullet(player, 'badBullet')
           this.projectiles.push(...projectiles)
         }
@@ -224,7 +224,8 @@ class Game {
         // Bullet-Powerup interaction
         if (e1 instanceof Powerup && e2 instanceof Bullet ||
           e1 instanceof Bullet && e2 instanceof Powerup) {
-          e1.destroyed = true
+          if (e1.type != 'lazerBullet') {
+            e1.destroyed = true}
           e2.destroyed = true
         }
       }

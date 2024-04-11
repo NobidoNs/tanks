@@ -52,6 +52,7 @@ class Game {
     this.deltaTime = 0
 
     this.updateTable = false
+    this.imgs = []
   }
 
   /**
@@ -108,6 +109,7 @@ class Game {
     this.viewport.updateTrackingPosition(state.self)
     this.leaderboard.update(state.players)
     this.cooldowns.update(state.players)
+    this.tb.pasteImages(state.self.imgs)
   }
 
   /**
