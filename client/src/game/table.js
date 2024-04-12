@@ -54,7 +54,6 @@ class Table {
   pasteImages(adress) {
     const keys = Object.keys(adress)
     for (let i = 0; i < keys.length; i++) {
-      // console.log("1",keys[i].split(','), adress[keys[i]])
       const x = Math.floor(keys[i].split(',')[0])
       const y = Math.floor(keys[i].split(',')[1])
       const cels = $("td");
@@ -62,7 +61,6 @@ class Table {
       const el = cels[n]
       const pipe = adress[keys[i]]
       const path = "img/icons/"+pipe+".png"
-      console.log(x,y,pipe)
       $(el).children().attr("src",path)
       $(el).children().attr("id",'td-img')
     }

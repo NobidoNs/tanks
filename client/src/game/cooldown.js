@@ -8,26 +8,35 @@ class Cooldown {
       return new Cooldown(document.getElementById(containerElementID))
     }
 
-    update(spels=[]) {
-      spels.forEach(element => {
-        // $("#dashCD0-img").show()
-        // console.log(element['lastUpdateTime']-element['lastDashTime'])
-        const delta_time = element['lastUpdateTime']-element['lastDashTime']
+    update(pl=[]) {
+      const player = pl[0]
+      const startTimes = ['lastDashTime']
+      const spells = ['dash']
+      for (let i = 0; i < startTimes.length; i++) {
+        const delta_time = player['lastUpdateTime']-player[startTimes[i]]
+        let name = '#'+spells[i]
         if (delta_time<=2000) {
-            $('#dashCD0-img').show()
+            $('#empty-img').hide()
+            $(name+'CD0-img').show()
         } else if (delta_time <= 4000) {
-            $('#dashCD0-img').hide()
-            $('#dashCD1-img').show()
+            $(name+'CD0-img').hide()
+            $(name+'CD1-img').show()
         } else if (delta_time <= 6000) {
-            $('#dashCD1-img').hide()
-            $('#dashCD2-img').show()
+            $(name+'CD1-img').hide()
+            $(name+'CD2-img').show()
         } else if (delta_time <= 8000) {
-            $('#dashCD2-img').hide()
-            $('#dashCD3-img').show()
+            $(name+'CD2-img').hide()
+            $(name+'CD3-img').show()
         } else {
-            $('#dashCD3-img').hide()
+            $(name+'CD3-img').hide()
+            $('#empty-img').show()
         }
-      });
+      }
+      if (player['invis'] == true) {
+        $('#invis_active-img').show()
+      } else {
+        $('#invis_active-img').hide()
+      }
     }
   }
   
