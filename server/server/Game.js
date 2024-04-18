@@ -222,7 +222,9 @@ class Game {
               if (e1.isDead()) {
                 e1.spawn()
                 e1.deaths++
-                e2.source.kills++
+                if (e2.type != 'badBullet') {
+                  e2.source.kills++
+                }
               }
             }
 
