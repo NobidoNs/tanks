@@ -1,7 +1,10 @@
 /**
- * Game class on the server to manage the state of existing players and
- * and entities.
- * @author alvin@omgimanerd.tech (Alvin Lin)
+todo:
+  multi shoot
+  shield
+  slow 
+  blast
+  world size
  */
 
 const Bullet = require('./Bullet')
@@ -103,32 +106,54 @@ class Game {
     const player = this.players.get(socketID)
     if (player) {
       player.updateOnInput(data)
-      // console.log(player.gun)
-      if (data.shoot && player.canShoot()) {
-        if (player.gun=='pipe') {
+      this.tryShoot(data.shoot, player)
+      this.useSpell(data, player)
+      
+      if (data.desired != []) {player.unlockSpell(data.desired)}
+    }
+  }
+
+  tryShoot(needShoot, player) {
+    if (needShoot && player.canShoot()) {
+      switch (player.gun) {
+        case 'pipe':
           const projectiles = player.getProjectilesFromShot(-1, 'pipeBullet')
           this.projectiles.push(...projectiles)
-        } else if (player.gun=='lazer' && player.energy>=Constants.LAZER_ENERGY) {
-          const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
-          this.projectiles.push(...projectiles)
-          player.energyAdd(-Constants.LAZER_ENERGY)
-        } else if (player.gun=='illusion' && player.energy>=Constants.ILLUSION_ENERGY) {
-          const projectiles = player.getProjectilesFromShot(-1, 'illusionBullet')
-          this.projectiles.push(...projectiles)
-          player.energyAdd(-Constants.ILLUSION_ENERGY)
-        }
+          break
+        case 'lazer': 
+          if (player.energy>=Constants.LAZER_ENERGY) {
+            const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.LAZER_ENERGY)
+          }
+          break
+        case 'illusion': 
+          if (player.energy>=Constants.ILLUSION_ENERGY) {
+            const projectiles = player.getProjectilesFromShot(-1, 'illusionBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.ILLUSION_ENERGY)
+          }
+          break
+        case 'slime':
+          if (player.energy>=Constants.SLIME_ENERGY) {
+            const projectiles = player.getProjectilesFromShot(2, 'slimeBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.SLIME_ENERGY)
+          }
       }
-      if (data.dash && player.canDash()) {
-        player.doDash()
-      }
+    }
+  }
 
-      if (data.invis && player.canInvis()) {
-          player.energyAdd(-0.01)
-          player.doInvis(true)
-      } else {
-        player.doInvis(false)
-      }
-      if (data.desired != []) {player.unlockSpell(data.desired)}
+  useSpell(data, player) {
+    if (data.dash && player.canDash()) {
+      player.doDash()
+    }
+
+    if (data.invis && player.canInvis()) {
+        player.energyAdd(-0.01)
+        player.doInvis(true)
+    } else {
+      player.doInvis(false)
     }
   }
 
@@ -163,8 +188,6 @@ class Game {
       ...this.projectiles,
       ...this.powerups
     ]
-    // this.players.forEach(
-    //   entity => {console.log(entity)})
 
     entities.forEach(
       entity => { entity.update(this.lastUpdateTime, this.deltaTime) })
@@ -183,14 +206,15 @@ class Game {
         }
         if (e1 instanceof Player && e2 instanceof Bullet &&
           (e2.source !== e1 || e2.type == 'badBullet')) {
-            // console.log(e1.bulletCollidedPipe(e2,e1.turretAngle), e1.energy, e1.gun)
             let reverse = false
+
             if (e2.type=='illusionBullet') {
               reverse = true
-            } else {
-              reverse = false
+            } 
+            else if (e2.type=='slimeBullet') {
+              e1.applyEffect(Constants.EFFECT_DATA['slime'])
             }
-            // console.log(reverse, e2.type)
+
             if (e1.bulletCollidedPipe(e2,e1.turretAngle, reverse) && e1.gun=='collecter') {
               e1.energyAdd(e2.damage)
             } else {
@@ -201,6 +225,7 @@ class Game {
                 e2.source.kills++
               }
             }
+
           e2.destroyed = true
         }
 

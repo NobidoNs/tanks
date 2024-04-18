@@ -20,6 +20,7 @@ class Powerup extends Entity {
    * @param {?} data Data associated with the powerup
    * @param {number} duration How long the powerup will last in milliseconds
    */
+  
   constructor(position, type, data, duration) {
     super(position, null, null, Constants.POWERUP_HITBOX_SIZE)
 

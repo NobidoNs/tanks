@@ -1,64 +1,61 @@
 const Constants = require('../lib/Constants')
 const Util = require('../lib/Util')
 
-class TalantTree {
+class TalantTree {  
   constructor() {
     this.talantTree = {
       'collecter':{
-        parent: 'self',
+        parents: [],
         childs: ['pipe', 'dash', 'invis'],
         access: true,
-        address: "7,5"
+        address: "8,5"
       },
       'pipe':{
-        parent: 'collecter',
+        parents: ['collecter'],
         childs: ['lazer', 'illusion'],
         access: false,
-        address: "7,4"
+        address: "8,4"
       },
       'lazer':{
-        parent: 'pipe',
+        parents: ['pipe'],
         childs: [],
         access: false,
-        address: "6,3"
+        address: "7,3"
       },
       'illusion':{
-        parent: 'pipe',
+        parents: ['pipe'],
         childs: [],
         access: false,
-        address: "8,3"
+        address: "9,3"
+      },
+      'slime':{
+        parents: ['lazer', 'illusion'],
+        childs: [],
+        access: false,
+        address: "8,2"
       },
       'dash':{
-        parent: 'collecter',
-        childs: [],
+        parents: ['collecter'],
+        childs: ['invis'],
         access: false,
-        address: "7,6"
+        address: "8,6"
       },
       'invis':{
-        parent: 'collecter',
+        parents: ['dash'],
         childs: [],
         access: false,
-        address: "7,7"
+        address: "8,7"
       }
     }
-    // this.talantTree = [{
-    //   collecter:[{
-    //     pipe:[{
-    //       lazer:[{}, false, 20],
-    //       illusion:[{}, false, 20],
-    //     }, false, 5],
 
-    //     dash:[{}, false, 10],
-    //     invis:[{}, false, 10]
-    //     }, true, 0]
-    //   }]
     this.address = {
-      "7,5":'collecter',
-      "7,4":'pipe',
-      "6,3":'lazer',
-      "8,3":'illusion',
-      "7,6":'dash',
-      "7,7":'invis'
+      "8,5":'collecter',
+      "8,4":'pipe',
+      "7,3":'lazer',
+      "9,3":'illusion',
+      "8,6":'dash',
+      "8,7":'invis',
+      "8,2":'slime'
     }
   }
 
@@ -67,19 +64,14 @@ class TalantTree {
   }
 
   unlock(address) {
+    // console.log(address)
     if (address != undefined && address.length != 0) {
-      // console.log(address)
       const name = this.getName(address)
       if (name != undefined) {
         let ret = this.unlockIfCan(name)
         return ret
       }
     }
-    // if (ret[0] == false) {
-    //   return false
-    // } else {
-    //   return true
-    // }
   }
 
   getName(address) {
@@ -88,13 +80,15 @@ class TalantTree {
 
   unlockIfCan(spellName) {
     const spell = this.talantTree[spellName]
-    // console.log(spellName)
-    // console.log(spell['access'])
     if (spell['access'] == false) {
-      if (this.talantTree[spell['parent']]['access'] == true) {
-        this.talantTree[spellName]['access'] = true
-        return true
+      const parents = spell['parents']
+      for (const parent of parents) {
+        if (this.talantTree[parent]['access']==false) {
+          return false
+        }
       }
+      this.talantTree[spellName]['access']=true
+      return true
     }
     return false
   }

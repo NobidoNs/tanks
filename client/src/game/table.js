@@ -3,7 +3,7 @@ class Table {
   constructor(container) {
     this.container = container
     this.rows = 11
-    this.cols = 15
+    this.cols = 17
   }
 
   generateTable() {
@@ -46,14 +46,12 @@ class Table {
     const n = y * this.cols + x
     const el = cels[n]
     $(el).css('background-color', color);
-
-    // $(el).children().attr("src","img/hexaTile.png")
-    // $(el).children().attr("id",'td-img')
   }
 
   pasteImages(adress) {
     const keys = Object.keys(adress)
     for (let i = 0; i < keys.length; i++) {
+
       const x = Math.floor(keys[i].split(',')[0])
       const y = Math.floor(keys[i].split(',')[1])
       const cels = $("td");

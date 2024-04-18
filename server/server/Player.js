@@ -58,6 +58,7 @@ class Player extends Entity {
 
     this.desired = []
     this.powerups = {}
+    this.effects = {}
     this.talants = new TalantTree()
 
     this.kills = 0
@@ -209,6 +210,13 @@ class Player extends Entity {
   applyPowerup(powerup) {
     powerup.expirationTime = this.lastUpdateTime + powerup.duration
     this.powerups[powerup.type] = powerup
+  }
+
+  applyEffect(effect) {
+    console.log(effect)
+    effect['expirationTime'] = this.lastUpdateTime + effect['duration']
+    this.effects[Object.keys(effect)[0]] = effect
+    console.log(this.effects)
   }
 
   /**
