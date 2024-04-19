@@ -5,7 +5,7 @@
 
 module.exports = {
   WORLD_MIN: 0,
-  WORLD_MAX: 5000,
+  WORLD_MAX: 3640,
   WORLD_PADDING: 30,
 
   DRAWING_NAME_FONT: '18px Helvetica',
@@ -53,6 +53,8 @@ module.exports = {
   PLAYER_DASH_COOLDOWN: 8000,
   PLAYER_DASH_DURATION: 100,
   PLAYER_DASH_SPEED: 400,
+  PLAYER_BOMB_DURATION: 100000,
+  PLAYER_BOMB_COOLDOWN: 8000,
   PLAYER_INVIS_CASTE: 4000,
   PLAYER_DEFAULT_HITBOX_SIZE: 20,
   PLAYER_SHIELD_HITBOX_SIZE: 45,
@@ -70,12 +72,15 @@ module.exports = {
   POWERUP_MIN_DURATION: 5000,
   POWERUP_MAX_DURATION: 15000,
   POWERUP_HEALTHPACK: 'healthpack',
+  POWERUP_BOMB: 'bomb',
   POWERUP_SHOTGUN: 'shotgun',
   POWERUP_RAPIDFIRE: 'rapidfire',
   POWERUP_SPEEDBOOST: 'speedboost',
   POWERUP_SHIELD: 'shield',
+  POWERUP_BOMB: 'bomb',
   POWERUP_KEYS: [
-    'healthpack'
+    'healthpack',
+    'bomb'
     // 'shotgun',
     // 'rapidfire',
     // 'speedboost',
@@ -108,8 +113,9 @@ module.exports = {
     'collecter': 0,
     'lazer': 20,
     'illusion': 20,
+    'slime': 11,
     'dash': 10,
     'invis': 10,
-    'slime': 11
+    'bomb': 10
   }
 }

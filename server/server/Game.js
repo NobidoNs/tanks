@@ -2,8 +2,9 @@
 todo:
   multi shoot
   shield
-  slow 
+  minimap*
   blast
+  bomb
   world size
  */
 
@@ -149,6 +150,10 @@ class Game {
       player.doDash()
     }
 
+    if (data.bomb && player.canBomb()) {
+      this.powerups.push(player.doBomb())
+    }
+
     if (data.invis && player.canInvis()) {
         player.energyAdd(-0.01)
         player.doInvis(true)
@@ -158,7 +163,6 @@ class Game {
   }
 
   badBullets(curTime) {
-    // console.log(this.players)
     this.players.forEach(
       player => {
         if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
@@ -236,10 +240,16 @@ class Game {
           e1 = entities[j]
           e2 = entities[i]
         }
-        if (e1 instanceof Player && e2 instanceof Powerup) {
+        if (e1 instanceof Player && e2 instanceof Powerup && e2.creator!=e1.socketID) {
           e1.applyPowerup(e2)
           e2.destroyed = true
-        }
+          if (e1.isDead()) {
+            e1.spawn()
+            e1.deaths++
+            this.players.get(e2.creator)['kills']++
+            // e2.source.kills++
+          }
+        } 
 
         // Bullet-Bullet interaction
         if (e1 instanceof Bullet && e2 instanceof Bullet &&

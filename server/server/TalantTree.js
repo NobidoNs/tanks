@@ -45,7 +45,13 @@ class TalantTree {
         childs: [],
         access: false,
         address: "8,7"
-      }
+      },
+      'bomb':{
+        parents: ['collecter'],
+        childs: [],
+        access: false,
+        address: "7,5"
+      },
     }
 
     this.address = {
@@ -55,7 +61,8 @@ class TalantTree {
       "9,3":'illusion',
       "8,6":'dash',
       "8,7":'invis',
-      "8,2":'slime'
+      "8,2":'slime',
+      "7,5":'bomb'
     }
   }
 
@@ -64,7 +71,6 @@ class TalantTree {
   }
 
   unlock(address) {
-    // console.log(address)
     if (address != undefined && address.length != 0) {
       const name = this.getName(address)
       if (name != undefined) {
@@ -95,6 +101,9 @@ class TalantTree {
 
   canDash() {
     return this.talantTree['dash']['access']
+  }
+  canBomb() {
+    return this.talantTree['bomb']['access']
   }
   canInvis() {
     return this.talantTree['invis']['access']

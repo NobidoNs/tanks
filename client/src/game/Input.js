@@ -19,6 +19,7 @@ class Input {
     this.dash = false
     this.talantTree = false
     this.invis = false
+    this.bomb = false
     this.gun = 'collecter'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
@@ -78,6 +79,9 @@ class Input {
     case 32:
       this.dash = true
       break
+    case 50:
+      this.bomb = true
+      break
     case 49:
       if (this.invis == false) {
         this.invis = true
@@ -120,6 +124,9 @@ class Input {
       this.down = false
     case 32:
       this.dash = false
+      break
+    case 50:
+      this.bomb = false
       break
     case 16:
       this.talantTree = false

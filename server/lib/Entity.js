@@ -38,16 +38,11 @@ class Entity {
   }
 
   bulletCollidedPipe(other, turretAngel, reverse) {
-    // console.log(other)
-    // console.log(other.position.x)
     const vx=other.position.x-this.position.x
     const vy=other.position.y-this.position.y
     let angle = Math.atan2(vy, vx)
     if (angle < 0) {
       angle+=2*Math.PI}
-    // console.log(vx,vy)
-    // console.log(angle)
-    // console.log(Math.abs(angle-turretAngel-Math.PI))
     if (reverse==false) {
       if (Math.abs(angle-turretAngel)<=1) {return true}
     } else {

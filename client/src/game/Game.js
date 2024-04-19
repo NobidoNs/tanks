@@ -157,6 +157,7 @@ class Game {
         turretAngle: Util.normalizeAngle(playerToMouseVector.angle + Math.PI),
         gun: this.input.gun,
         dash: this.input.dash,
+        bomb: this.input.bomb,
         invis: this.input.invis,
         desired: this.desired
       })

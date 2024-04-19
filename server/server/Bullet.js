@@ -26,7 +26,6 @@ class Bullet extends Entity {
     this.angle = angle
     this.source = source
 
-    // console.log(this.velocity.mag2)
     this.damage = Constants.BULLET_DEFAULT_DAMAGE+this.velocity.mag2
     this.distanceTraveled = 0
     this.destroyed = false
@@ -42,7 +41,6 @@ class Bullet extends Entity {
    */
   static createFromPlayer(player, angleDeviation = 0, velocity, type) {
     const angle = player.turretAngle + angleDeviation
-    // console.log(player.position)
     return new Bullet(
       player.position.copy(),
       Vector.fromPolar(Constants.BULLET_SPEED+velocity, angle),
@@ -74,10 +72,7 @@ class Bullet extends Entity {
     const inWorldX = player['position']['x']-x
     const inWorldY = player['position']['y']-y
     const vel = Util.randRange(0.5,1.5)
-    // const vel = 0
     const angle = Math.atan2(y, x)
-    // console.log(Util.randRangeInt(1,3))
-    // console.log(angle, x, y)
     return [
       new Bullet(
       Vector.fromArray([inWorldX,inWorldY]),

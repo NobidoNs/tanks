@@ -38,11 +38,13 @@ class Player extends Entity {
     this.speed = Constants.PLAYER_DEFAULT_SPEED
 
     this.dashCooldown = Constants.PLAYER_DASH_COOLDOWN
+    this.bombCooldown = Constants.PLAYER_BOMB_COOLDOWN
     this.shotCooldown = Constants.PLAYER_SHOT_COOLDOWN
     this.lastUpdateTime = 0
     this.lastShotTime = 0
     this.startCasteTime = 0
     this.lastDashTime = 0
+    this.lastBombTime = 0
     this.lastBadBulletSummon = 0
     this.deltaSummon = 0
 
@@ -125,9 +127,19 @@ class Player extends Entity {
 
   doDash() {
     if (this.lastUpdateTime+Constants.PLAYER_DASH_DURATION > this.lastDashTime) {
+      this.lastDashTime = this.lastUpdateTime
+      this.energyAdd(-Constants.PRICES['dash'])
       this.position.add(Vector.fromPolar(Constants.PLAYER_DASH_SPEED, this.tankAngle))
     }
-    this.lastDashTime = this.lastUpdateTime
+  }
+
+  doBomb() {
+    if (this.lastUpdateTime+Constants.PLAYER_BOMB_DURATION > this.lastBombTime) {
+      this.lastBombTime = this.lastUpdateTime
+      this.energyAdd(-Constants.PRICES['bomb'])
+      const pos = Vector.fromArray([this.position['x'], this.position['y']])
+      return Powerup.createBomb(pos, Constants.PLAYER_BOMB_DURATION, this.socketID)
+    }
   }
 
   doInvis(fl) {
@@ -166,6 +178,11 @@ class Player extends Entity {
           this.health + powerup.data, Constants.PLAYER_MAX_HEALTH)
         this.powerups[type] = null
         break
+      case Constants.POWERUP_BOMB:
+        this.health -= Math.floor(powerup.data)
+        this.powerups[type] = null
+        break
+
       case Constants.POWERUP_SHOTGUN:
         break
       case Constants.POWERUP_RAPIDFIRE:
@@ -210,6 +227,7 @@ class Player extends Entity {
   applyPowerup(powerup) {
     powerup.expirationTime = this.lastUpdateTime + powerup.duration
     this.powerups[powerup.type] = powerup
+    this.updatePowerups()
   }
 
   applyEffect(effect) {
@@ -230,6 +248,11 @@ class Player extends Entity {
   canDash() {
     return this.lastUpdateTime > this.lastDashTime + this.dashCooldown && 
     this.talants.canDash()
+  }
+
+  canBomb() {
+    return this.lastUpdateTime > this.lastBombTime + this.bombCooldown && 
+    this.talants.canBomb()
   }
 
   canInvis() {
