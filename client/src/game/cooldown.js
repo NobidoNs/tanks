@@ -1,4 +1,6 @@
 const $ = require('jquery')
+const Constants = require('lib/Constants')
+
 class Cooldown {
     constructor(container) {
       this.container = container
@@ -10,26 +12,20 @@ class Cooldown {
 
     update(pl=[]) {
       const player = pl[0]
-      const startTimes = ['lastDashTime']
-      const spells = ['dash']
+      const startTimes = Constants.START_SPELL_TIMES
+      const spells = Constants.SPELLS
       for (let i = 0; i < startTimes.length; i++) {
         const delta_time = player['lastUpdateTime']-player[startTimes[i]]
-        let name = '#'+spells[i]
-        if (delta_time<=2000) {
-            $('#empty-img').hide()
-            $(name+'CD0-img').show()
-        } else if (delta_time <= 4000) {
-            $(name+'CD0-img').hide()
-            $(name+'CD1-img').show()
-        } else if (delta_time <= 6000) {
-            $(name+'CD1-img').hide()
-            $(name+'CD2-img').show()
-        } else if (delta_time <= 8000) {
-            $(name+'CD2-img').hide()
-            $(name+'CD3-img').show()
+        if (delta_time <= 8000) {
+          if (spells[i]=='dash') {
+            $('#dash_empty-img').hide()
+          }
+          $('#'+spells[i]+'-gif').show()
         } else {
-            $(name+'CD3-img').hide()
-            $('#empty-img').show()
+          if (spells[i]=='dash') {
+            $('#dash_empty-img').show()
+          }
+          $('#'+spells[i]+'-gif').hide()
         }
       }
       if (player['invis'] == true) {

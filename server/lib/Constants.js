@@ -102,6 +102,9 @@ module.exports = {
     slime: {speed:0.1, duration:4000}
   },
 
+  SPELLS: ['dash', 'bomb'],
+  START_SPELL_TIMES: ['lastDashTime', 'lastBombTime'],
+
   LAZER_ENERGY:5,
   ILLUSION_ENERGY:5,
   SLIME_ENERGY:5,
