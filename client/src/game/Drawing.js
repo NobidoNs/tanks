@@ -81,7 +81,6 @@ class Drawing {
    * @param {Player} player The player object to draw.
    */
   drawTank(isSelf, player) {
-    // console.log(player)
     let part = 1
     if (player['invis']) {
       const deltaTime = player['lastUpdateTime']-player['startCasteTime']

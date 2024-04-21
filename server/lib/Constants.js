@@ -86,6 +86,10 @@ module.exports = {
     // 'speedboost',
     // 'shield'
   ],
+  EFFECT_SLIME: 'slime',
+  EFFECT_KEYS: [
+    'slime'
+  ],
   POWERUP_DATA: {
     healthpack: { MIN: 5, MAX: 10 },
     shotgun: { MIN: 1, MAX: 2 },

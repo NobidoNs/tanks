@@ -123,6 +123,7 @@ class Player extends Entity {
     this.tankAngle = Util.normalizeAngle(
       this.tankAngle + this.turnRate * deltaTime)
     this.updatePowerups()
+    this.updateEffects()
   }
 
   doDash() {
@@ -220,6 +221,28 @@ class Player extends Entity {
     }
   }
 
+  updateEffects() {
+    for (const type of Constants.EFFECT_KEYS) {
+      const effect = this.effects[type]
+      if (!effect) {
+        continue
+      }
+      switch (type) {
+      case Constants.EFFECT_SLIME:
+        this.speed = Constants.PLAYER_DEFAULT_SPEED * effect['speed']
+        break
+      }
+      if (this.lastUpdateTime > effect.expirationTime) {
+        switch (type) {
+        case Constants.EFFECT_SLIME:
+          this.speed = Constants.PLAYER_DEFAULT_SPEED
+          break
+        }
+        // this.effects[type] = null
+      }
+    }
+  }
+
   /**
    * Applies a Powerup to this player.
    * @param {Powerup} powerup The Powerup object.
@@ -230,11 +253,11 @@ class Player extends Entity {
     this.updatePowerups()
   }
 
-  applyEffect(effect) {
-    console.log(effect)
-    effect['expirationTime'] = this.lastUpdateTime + effect['duration']
-    this.effects[Object.keys(effect)[0]] = effect
-    console.log(this.effects)
+  applyEffect(name) {
+    const effect_data = Constants.EFFECT_DATA[name]
+    effect_data['expirationTime'] = this.lastUpdateTime + effect_data['duration']
+    this.effects[name] = effect_data
+    this.updateEffects()
   }
 
   /**

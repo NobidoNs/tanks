@@ -36,6 +36,7 @@ class Game {
     this.players = new Map()
     this.projectiles = []
     this.powerups = []
+    this.visualEffects = []
 
     this.lastSummonTime = 0
     this.lastUpdateTime = 0
@@ -215,13 +216,13 @@ class Game {
             if (e2.type=='illusionBullet') {
               reverse = true
             } 
-            else if (e2.type=='slimeBullet') {
-              e1.applyEffect(Constants.EFFECT_DATA['slime'])
-            }
 
             if (e1.bulletCollidedPipe(e2,e1.turretAngle, reverse) && e1.gun=='collecter') {
               e1.energyAdd(e2.damage)
             } else {
+              if (e2.type=='slimeBullet') {
+                e1.applyEffect('slime')
+              }
               e1.damage(e2.damage)
               if (e1.isDead()) {
                 e1.spawn()
@@ -264,6 +265,18 @@ class Game {
           if (e1.type != 'lazerBullet') {
             e1.destroyed = true}
           e2.destroyed = true
+        }
+
+        // Powerup-Powerup interaction
+        if (e1 instanceof Powerup && e2 instanceof Powerup) {
+          e1.destroyed = true
+          e2.destroyed = true
+          const creator = this.players.get(e1.creator)
+          creator.damage(e1.data+e2.data)
+          if (creator.isDead()) {
+            creator.spawn()
+            creator.deaths++
+          }
         }
       }
     }
