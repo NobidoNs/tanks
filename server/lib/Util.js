@@ -87,11 +87,20 @@ const choiceArray = array => {
   return array[randRangeInt(0, array.length)]
 }
 
+const delElementFromArray = (array,element) => {
+  const index = array.indexOf(element);
+  if (index > -1) { // only splice array when item is found
+    array.splice(index, 1); // 2nd parameter means remove one item only
+  }
+  return array
+} 
+
 module.exports = {
   normalizeAngle,
   inBound,
   bound,
   randRange,
   randRangeInt,
-  choiceArray
+  choiceArray,
+  delElementFromArray
 }

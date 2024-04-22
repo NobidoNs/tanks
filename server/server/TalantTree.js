@@ -30,9 +30,15 @@ class TalantTree {
       },
       'slime':{
         parents: ['lazer', 'illusion'],
-        childs: [],
+        childs: ['stun'],
         access: false,
         address: "8,2"
+      },
+      'stun':{
+        parents: ['slime'],
+        childs: [],
+        access: false,
+        address: "7,1"
       },
       'dash':{
         parents: ['collecter'],
@@ -59,9 +65,10 @@ class TalantTree {
       "8,4":'pipe',
       "7,3":'lazer',
       "9,3":'illusion',
+      "8,2":'slime',
+      "7,1":'stun',
       "8,6":'dash',
       "8,7":'invis',
-      "8,2":'slime',
       "7,5":'bomb'
     }
   }

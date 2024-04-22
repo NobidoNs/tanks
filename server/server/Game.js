@@ -4,8 +4,8 @@ todo:
   shield
   minimap*
   blast
-  bomb
-  world size
+  add button name in icons
+  most slime
  */
 
 const Bullet = require('./Bullet')
@@ -123,25 +123,33 @@ class Game {
           this.projectiles.push(...projectiles)
           break
         case 'lazer': 
-          if (player.energy>=Constants.LAZER_ENERGY) {
+          if (player.energy>=Constants.SHOOT_ENERGIES['lazer']) {
             const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
             this.projectiles.push(...projectiles)
-            player.energyAdd(-Constants.LAZER_ENERGY)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['lazer'])
           }
           break
         case 'illusion': 
-          if (player.energy>=Constants.ILLUSION_ENERGY) {
+          if (player.energy>=Constants.SHOOT_ENERGIES['illusion']) {
             const projectiles = player.getProjectilesFromShot(-1, 'illusionBullet')
             this.projectiles.push(...projectiles)
-            player.energyAdd(-Constants.ILLUSION_ENERGY)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['illusion'])
           }
           break
         case 'slime':
-          if (player.energy>=Constants.SLIME_ENERGY) {
+          if (player.energy>=Constants.SHOOT_ENERGIES['slime']) {
             const projectiles = player.getProjectilesFromShot(2, 'slimeBullet')
             this.projectiles.push(...projectiles)
-            player.energyAdd(-Constants.SLIME_ENERGY)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['slime'])
           }
+          break
+        case 'stun':
+          if (player.energy>=Constants.SHOOT_ENERGIES['stun']) {
+            const projectiles = player.getProjectilesFromShot(2, 'stunBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['stun'])
+          }
+          break
       }
     }
   }
@@ -222,6 +230,9 @@ class Game {
             } else {
               if (e2.type=='slimeBullet') {
                 e1.applyEffect('slime')
+              }
+              if (e2.type=='stunBullet') {
+                e1.applyEffect('stun')
               }
               e1.damage(e2.damage)
               if (e1.isDead()) {

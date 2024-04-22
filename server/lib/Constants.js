@@ -20,6 +20,7 @@ module.exports = {
   DRAWING_IMG_ILLUSION_TURRET: 'guns/illusion_turret',
   DRAWING_IMG_LAZER_TURRET: 'guns/lazer_turret',
   DRAWING_IMG_SLIME_TURRET: 'guns/slime_turret',
+  DRAWING_IMG_STUN_TURRET: 'guns/stun_turret',
   DRAWING_IMG_TURRET: 'guns/turret',
   DRAWING_IMG_OTHER_TANK: 'other_tank',
   DRAWING_IMG_OTHER_TURRET: 'other_turret',
@@ -29,12 +30,13 @@ module.exports = {
   DRAWING_IMG_ILLUSION_BULLET: 'bullets/illusionBullet',
   DRAWING_IMG_LAZER_BULLET: 'bullets/lazer_bullet',
   DRAWING_IMG_SLIME_BULLET: 'bullets/slime_bullet',
+  DRAWING_IMG_STUN_BULLET: 'bullets/stun_bullet',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
     'selfTank/self_tank', 'guns/turret', 'other_tank', 'other_turret', 'shield',
     'bullets/pipe_bullet', 'bullets/lazer_bullet', 'bullets/slime_bullet', 'hexaTile', 'bullets/badBullet', 
     'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret',
-    'guns/lazer_turret', 'guns/slime_turret'
+    'guns/lazer_turret', 'guns/slime_turret', 'guns/stun_turret', 'bullets/stun_bullet',
   ],
   DRAWING_TILE_SIZE: 364,
 
@@ -60,7 +62,7 @@ module.exports = {
   PLAYER_SHIELD_HITBOX_SIZE: 45,
   PLAYER_MAX_HEALTH: 100,
   PLAYER_MAX_ENERGY: 100,
-  PLAYER_START_ENERGY: 75,
+  PLAYER_START_ENERGY: 95,
 
   BULLET_DEFAULT_DAMAGE: 5,
   BULLET_SPEED: 2,
@@ -87,8 +89,10 @@ module.exports = {
     // 'shield'
   ],
   EFFECT_SLIME: 'slime',
+  EFFECT_STUN: 'stun',
   EFFECT_KEYS: [
-    'slime'
+    'slime',
+    'stun'
   ],
   POWERUP_DATA: {
     healthpack: { MIN: 5, MAX: 10 },
@@ -99,21 +103,27 @@ module.exports = {
   },
 
   EFFECT_DATA: {
-    slime: {speed:0.1, duration:4000}
+    slime: {speed:0.1, duration:4000},
+    stun: {speed:0, duration:4000}
   },
 
   SPELLS: ['dash', 'bomb'],
   START_SPELL_TIMES: ['lastDashTime', 'lastBombTime'],
 
-  LAZER_ENERGY:5,
-  ILLUSION_ENERGY:5,
-  SLIME_ENERGY:5,
+  SHOOT_ENERGIES: {
+    'lazer':5,
+    'illusion':5,
+    'slime':5,
+    'stun':5,
+  },
+
   GUN_TYPES: {
     'pipe': 'guns/turret',
     'collecter': 'guns/collect_turret',
     'lazer': 'guns/lazer_turret',
     'illusion': 'guns/illusion_turret',
-    'slime': 'guns/slime_turret'
+    'slime': 'guns/slime_turret',
+    'stun': 'guns/stun_turret'
   },
   PRICES:{
     'pipe': 5,
@@ -121,6 +131,7 @@ module.exports = {
     'lazer': 20,
     'illusion': 20,
     'slime': 11,
+    'stun': 15,
     'dash': 10,
     'invis': 10,
     'bomb': 10

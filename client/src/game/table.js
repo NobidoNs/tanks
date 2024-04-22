@@ -21,7 +21,6 @@ class Table {
         }
         td = `<td onclick="learn(${j},${i})" style='background-color: ${color}'>
         <img src="img/empty.png" id='td-img'/></td>`;
-        // td = `<td onclick="learn(${j},${i})"'></td>`;
         row+=td
       }
       row += '</tr>'

@@ -61,6 +61,7 @@ class Player extends Entity {
     this.desired = []
     this.powerups = {}
     this.effects = {}
+    this.block = []
     this.talants = new TalantTree()
 
     this.kills = 0
@@ -85,12 +86,14 @@ class Player extends Entity {
    * @param {Object} data A JSON Object storing the input state
    */
   updateOnInput(data) {
-    if (data.up) {
-      this.velocity = Vector.fromPolar(this.speed, this.tankAngle)
-    } else if (data.down) {
-      this.velocity = Vector.fromPolar(-this.speed, this.tankAngle)
-    } else if (!(data.up ^ data.down)) {
-      this.velocity = Vector.zero()
+    if (!this.block.includes('speed')) {
+      if (data.up) {
+        this.velocity = Vector.fromPolar(this.speed, this.tankAngle)
+      } else if (data.down) {
+        this.velocity = Vector.fromPolar(-this.speed, this.tankAngle)
+      } else if (!(data.up ^ data.down)) {
+        this.velocity = Vector.zero()
+      }
     }
 
     if (data.right) {
@@ -106,7 +109,9 @@ class Player extends Entity {
     }
     this.dash = data.dash
 
-    this.turretAngle = data.turretAngle
+    if (!this.block.includes('turret_rotate')) {
+      this.turretAngle = data.turretAngle
+    } 
   }
 
   /**
@@ -115,13 +120,15 @@ class Player extends Entity {
    * @param {number} deltaTime The timestep to compute the update with
    */
   update(lastUpdateTime, deltaTime) {
-    // this.updateTable = [false]
     this.lastUpdateTime = lastUpdateTime
     this.position.add(Vector.scale(this.velocity, deltaTime))
-    // if (dash) {this.position.add(Vector.scale(this.velocity, 40))}
     this.boundToWorld()
     this.tankAngle = Util.normalizeAngle(
       this.tankAngle + this.turnRate * deltaTime)
+    if (this.block.includes('turret_rotate')) {
+      this.turretAngle = Util.normalizeAngle(
+        this.turretAngle + this.turnRate * deltaTime)
+    }
     this.updatePowerups()
     this.updateEffects()
   }
@@ -227,9 +234,17 @@ class Player extends Entity {
       if (!effect) {
         continue
       }
+
       switch (type) {
       case Constants.EFFECT_SLIME:
         this.speed = Constants.PLAYER_DEFAULT_SPEED * effect['speed']
+        break
+      case Constants.EFFECT_STUN:
+        if (!this.block.includes('speed')) {
+          this.block.push('speed')
+        } else if (!this.block.includes('turret_rotate')) {
+          this.block.push('turret_rotate')
+        }
         break
       }
       if (this.lastUpdateTime > effect.expirationTime) {
@@ -237,8 +252,12 @@ class Player extends Entity {
         case Constants.EFFECT_SLIME:
           this.speed = Constants.PLAYER_DEFAULT_SPEED
           break
+        case Constants.EFFECT_STUN:
+          this.block = Util.delElementFromArray(this.block, 'speed')
+          this.block = Util.delElementFromArray(this.block, 'turret_rotate')
+          break
         }
-        // this.effects[type] = null
+        this.effects[type] = null
       }
     }
   }

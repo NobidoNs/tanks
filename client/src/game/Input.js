@@ -76,6 +76,9 @@ class Input {
     case 67:
       this.gun = 'slime'
       break
+    case 88:
+      this.gun = 'stun'
+      break
     case 32:
       this.dash = true
       break
