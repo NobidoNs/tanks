@@ -169,8 +169,11 @@ class Drawing {
     case "slimeBullet":
       img = Constants.DRAWING_IMG_SLIME_BULLET
       break
-    case "stunBullet":
-      img = Constants.DRAWING_IMG_STUN_BULLET
+    case "phis_stunBullet":
+      img = Constants.DRAWING_IMG_phis_STUN_BULLET
+      break
+    case "mag_stunBullet":
+      img = Constants.DRAWING_IMG_mag_STUN_BULLET
       break
     }
     this.context.save()

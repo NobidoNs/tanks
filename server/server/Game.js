@@ -1,11 +1,13 @@
 /**
 todo:
+  visual effects
+  scaner
   multi shoot
-  shield
   minimap*
   blast
+  stun bomb
   add button name in icons
-  most slime
+  can learn spell/gun
  */
 
 const Bullet = require('./Bullet')
@@ -143,11 +145,18 @@ class Game {
             player.energyAdd(-Constants.SHOOT_ENERGIES['slime'])
           }
           break
-        case 'stun':
-          if (player.energy>=Constants.SHOOT_ENERGIES['stun']) {
-            const projectiles = player.getProjectilesFromShot(2, 'stunBullet')
+        case 'phis_stun':
+          if (player.energy>=Constants.SHOOT_ENERGIES['phis_stun']) {
+            const projectiles = player.getProjectilesFromShot(2, 'phis_stunBullet')
             this.projectiles.push(...projectiles)
-            player.energyAdd(-Constants.SHOOT_ENERGIES['stun'])
+            player.energyAdd(-Constants.SHOOT_ENERGIES['phis_stun'])
+          }
+          break
+        case 'mag_stun':
+          if (player.energy>=Constants.SHOOT_ENERGIES['mag_stun']) {
+            const projectiles = player.getProjectilesFromShot(2, 'mag_stunBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['mag_stun'])
           }
           break
       }
@@ -223,23 +232,27 @@ class Game {
 
             if (e2.type=='illusionBullet') {
               reverse = true
-            } 
-
-            if (e1.bulletCollidedPipe(e2,e1.turretAngle, reverse) && e1.gun=='collecter') {
-              e1.energyAdd(e2.damage)
+            }
+            if (e2.type=='mag_stunBullet') {
+              e1.applyEffect('stun')
             } else {
-              if (e2.type=='slimeBullet') {
-                e1.applyEffect('slime')
-              }
-              if (e2.type=='stunBullet') {
-                e1.applyEffect('stun')
-              }
-              e1.damage(e2.damage)
-              if (e1.isDead()) {
-                e1.spawn()
-                e1.deaths++
-                if (e2.type != 'badBullet') {
-                  e2.source.kills++
+
+              if (e1.bulletCollidedPipe(e2,e1.turretAngle, reverse) && e1.gun=='collecter') {
+                e1.energyAdd(e2.damage)
+              } else {
+                if (e2.type=='slimeBullet') {
+                  e1.applyEffect('slime')
+                }
+                if (e2.type=='phis_stunBullet') {
+                  e1.applyEffect('stun')
+                }
+                e1.damage(e2.damage)
+                if (e1.isDead()) {
+                  e1.spawn()
+                  e1.deaths++
+                  if (e2.type != 'badBullet') {
+                    e2.source.kills++
+                  }
                 }
               }
             }

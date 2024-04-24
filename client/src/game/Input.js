@@ -77,7 +77,10 @@ class Input {
       this.gun = 'slime'
       break
     case 88:
-      this.gun = 'stun'
+      this.gun = 'phis_stun'
+      break
+    case 90:
+      this.gun = 'mag_stun'
       break
     case 32:
       this.dash = true
