@@ -125,7 +125,8 @@ class Drawing {
     this.context.rotate(Drawing.translateAngle(player.tankAngle+Math.PI/2))
 
     this.drawCenteredImage(this.images[
-      Constants.DRAWING_IMG_SELF_TANK
+      isSelf ? Constants.DRAWING_IMG_SELF_TANK :
+        Constants.DRAWING_IMG_OTHER_TANK
     ], 1/part)
     this.context.rotate(-Drawing.translateAngle(player.tankAngle))
 

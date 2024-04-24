@@ -15,7 +15,7 @@ module.exports = {
   DRAWING_ENERGY_COLOR: 'blue',
   DRAWING_ENERGY_MISSING_COLOR: 'grey',
   DRAWING_IMG_BASE_PATH: 'img',
-  DRAWING_IMG_SELF_TANK: 'selfTank/self_tank',
+  DRAWING_IMG_SELF_TANK: 'self_tank',
   DRAWING_IMG_COLLECT_TURRET: 'guns/collect_turret',
   DRAWING_IMG_ILLUSION_TURRET: 'guns/illusion_turret',
   DRAWING_IMG_LAZER_TURRET: 'guns/lazer_turret',
@@ -33,7 +33,7 @@ module.exports = {
   DRAWING_IMG_STUN_BULLET: 'bullets/stun_bullet',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
-    'selfTank/self_tank', 'guns/turret', 'other_tank', 'other_turret', 'shield',
+    'self_tank', 'guns/turret', 'other_tank', 'other_turret', 'shield',
     'bullets/pipe_bullet', 'bullets/lazer_bullet', 'bullets/slime_bullet', 'hexaTile', 'bullets/badBullet', 
     'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret',
     'guns/lazer_turret', 'guns/slime_turret', 'guns/stun_turret', 'bullets/stun_bullet',
