@@ -21,8 +21,8 @@ class Powerup extends Entity {
    * @param {number} duration How long the powerup will last in milliseconds
    */
   
-  constructor(position, type, data, duration, creator='') {
-    super(position, null, null, Constants.POWERUP_HITBOX_SIZE)
+  constructor(position, type, data, duration, creator='', hitbox=Constants.POWERUP_HITBOX_SIZE) {
+    super(position, null, null, hitbox)
 
     this.type = type
     this.data = data
@@ -80,7 +80,7 @@ class Powerup extends Entity {
 
   static createBomb(position, duration, creator) {
     const damage = Util.randRangeInt(10,20)
-    return new Powerup(position, 'bomb', damage, duration, creator)
+    return new Powerup(position, 'bomb', damage, duration, creator, Constants.BOMB_HITBOX_SIZE)
   }
 }
 

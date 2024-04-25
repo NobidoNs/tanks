@@ -33,9 +33,10 @@ module.exports = {
   DRAWING_IMG_SLIME_BULLET: 'bullets/slime_bullet',
   DRAWING_IMG_phis_STUN_BULLET: 'bullets/phis_stun_bullet',
   DRAWING_IMG_mag_STUN_BULLET: 'bullets/mag_stun_bullet',
+  DRAWING_IMG_POWPOWBOOM: 'powPowBoom',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
-    'self_tank', 'guns/turret', 'other_tank', 'other_turret', 'shield',
+    'self_tank', 'powPowBoom', 'guns/turret', 'other_tank', 'other_turret', 'shield',
     'bullets/pipe_bullet', 'bullets/lazer_bullet', 'bullets/slime_bullet', 'hexaTile', 'bullets/badBullet', 
     'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret',
     'guns/lazer_turret', 'guns/slime_turret', 'guns/phis_stun_turret', 'bullets/phis_stun_bullet',
@@ -72,7 +73,8 @@ module.exports = {
   BULLET_MAX_TRAVEL_DISTANCE_SQ: 1000 * 1000,
   BULLET_HITBOX_SIZE: 10,
 
-  POWERUP_HITBOX_SIZE: 5,
+  POWERUP_HITBOX_SIZE: 7,
+  BOMB_HITBOX_SIZE: 40,
   POWERUP_MAX_COUNT: 50,
   POWERUP_MIN_DURATION: 5000,
   POWERUP_MAX_DURATION: 15000,

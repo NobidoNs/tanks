@@ -14,6 +14,7 @@ const Bullet = require('./Bullet')
 const TalantTree = require('./talantTree')
 const Player = require('./Player')
 const Powerup = require('./Powerup')
+const Beauty = require('./VisualEffect')
 
 const Util = require('../lib/Util')
 const Constants = require('../lib/Constants')
@@ -38,6 +39,7 @@ class Game {
     this.players = new Map()
     this.projectiles = []
     this.powerups = []
+    this.beauty = []
     this.visualEffects = []
 
     this.lastSummonTime = 0
@@ -201,6 +203,9 @@ class Game {
     this.deltaTime = currentTime - this.lastUpdateTime
     this.lastUpdateTime = currentTime
     this.badBullets(currentTime)
+    this.beauty.forEach(
+      effect => {effect.update(this.lastUpdateTime)}
+    )
     /**
      * Perform a physics update and collision update for all entities
      * that need it.
@@ -284,19 +289,29 @@ class Game {
         }
 
         // Bullet-Powerup interaction
-        if (e1 instanceof Powerup && e2 instanceof Bullet ||
-          e1 instanceof Bullet && e2 instanceof Powerup) {
-          if (e1.type != 'lazerBullet') {
-            e1.destroyed = true}
+        if (e1 instanceof Bullet && e2 instanceof Powerup) {
+          e1 = entities[j]
+          e2 = entities[i]
+        }
+        if (e1 instanceof Powerup && e2 instanceof Bullet) {
+          e1.destroyed = true
           e2.destroyed = true
+          if (e2.type == 'lazerBullet') {
+            e2.destroyed = false
+          } else if (e2.type == 'badBullet' && e1.type == 'bomb') {
+            e1.destroyed = false
+          }
+          
         }
 
         // Powerup-Powerup interaction
-        if (e1 instanceof Powerup && e2 instanceof Powerup) {
+        if (e1 instanceof Powerup && e2 instanceof Powerup && 
+        e1.type != Constants.POWERUP_HEALTHPACK && e2.type != Constants.POWERUP_HEALTHPACK) {
           e1.destroyed = true
           e2.destroyed = true
           const creator = this.players.get(e1.creator)
           creator.damage(e1.data+e2.data)
+          this.beauty.push(Beauty.create(e1.position,'powPowBoom',300, this.lastUpdateTime))
           if (creator.isDead()) {
             creator.spawn()
             creator.deaths++
@@ -312,6 +327,8 @@ class Game {
       projectile => !projectile.destroyed)
     this.powerups = this.powerups.filter(
       powerup => !powerup.destroyed)
+    this.beauty = this.beauty.filter(
+      beauty => !beauty.destroyed)
 
     /**
      * Repopulate the world with new powerups.
@@ -332,7 +349,8 @@ class Game {
         self: currentPlayer,
         players: players,
         projectiles: this.projectiles,
-        powerups: this.powerups
+        powerups: this.powerups,
+        beauty: this.beauty
       })
     })
   }

@@ -53,6 +53,7 @@ class Game {
 
     this.updateTable = false
     this.imgs = []
+    this.beauty = []
   }
 
   /**
@@ -105,6 +106,7 @@ class Game {
     this.players = state.players
     this.projectiles = state.projectiles
     this.powerups = state.powerups
+    this.beauty = state.beauty
     this.updateTable = state.self.updateTable
     this.viewport.updateTrackingPosition(state.self)
     this.leaderboard.update(state.players)
@@ -184,6 +186,8 @@ class Game {
       this.players.forEach(tank => {if (tank.socketID!=this.self.socketID) {this.drawing.drawTank(false, tank)}})
 
       this.drawing.drawTank(true, this.self)
+
+      this.beauty.forEach(this.drawing.drawBeauty.bind(this.drawing))
     }
   }
 }

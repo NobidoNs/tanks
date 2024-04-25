@@ -189,10 +189,30 @@ class Drawing {
    * @param {Powerup} powerup The powerup to draw
    */
   drawPowerup(powerup) {
+    // console.log(this.images[powerup.type])
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(powerup.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
     this.drawCenteredImage(this.images[powerup.type])
+    this.context.restore()
+  }
+
+  onDrawFrame(ctx, frame) {
+    // update canvas size
+    canvas.width = frame.width;
+    canvas.height = frame.height;
+    // update canvas that we are using for Konva.Image
+    ctx.drawImage(frame.buffer, 0, 0);
+    // redraw the layer
+    layer.draw();
+  }
+
+  drawBeauty(effect) {
+    this.context.save()
+    const canvasCoords = this.viewport.toCanvas(effect.position)
+    this.context.translate(canvasCoords.x, canvasCoords.y)
+    // console.log(this.images, effect.type)
+    this.drawCenteredImage(this.images[effect.type])
     this.context.restore()
   }
 
