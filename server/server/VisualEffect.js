@@ -2,21 +2,16 @@ const Constants = require('../lib/Constants')
 const Util = require('../lib/Util')
 
 class Beauty {  
-  constructor(position, type, duration, cur_time) {
+  constructor(position, type, duration, cur_time, data={}) {
     this.type = type
     this.position = position
-    this.end_time = duration+cur_time
+    this.endTime = duration+cur_time
     this.destroyed = false
+    this.data = data
   }
 
-  static create(position, type, duration, cur_time) {
-    return new Beauty(position, type, duration, cur_time)
-  }
-
-  update(cur_time) {
-    if (cur_time > this.end_time) {
-      this.destroyed = true
-    }
+  static create(position, type, duration, cur_time, data={}) {
+    return new Beauty(position, type, duration, cur_time, data)
   }
 }
 

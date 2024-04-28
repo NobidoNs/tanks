@@ -150,8 +150,11 @@ class Drawing {
    * Draws a bullet (tank shell) to the canvas.
    * @param {Bullet} bullet The bullet to draw to the canvas
    */
-  drawBullet(bullet) {
-    // console.log(bullet.type)
+  drawBullet(bullet, debug=false) {
+    if (debug == true) {
+      console.log(bullet)
+    }
+
     let img = ''
     switch (bullet.type) {
     case "pipeBullet":
@@ -197,23 +200,22 @@ class Drawing {
     this.context.restore()
   }
 
-  onDrawFrame(ctx, frame) {
-    // update canvas size
-    canvas.width = frame.width;
-    canvas.height = frame.height;
-    // update canvas that we are using for Konva.Image
-    ctx.drawImage(frame.buffer, 0, 0);
-    // redraw the layer
-    layer.draw();
-  }
-
-  drawBeauty(effect) {
-    this.context.save()
-    const canvasCoords = this.viewport.toCanvas(effect.position)
-    this.context.translate(canvasCoords.x, canvasCoords.y)
-    // console.log(this.images, effect.type)
-    this.drawCenteredImage(this.images[effect.type])
-    this.context.restore()
+  drawBeauty(effect, layer) {
+    // console.log(effect)
+    if (effect.type.includes('Bullet')) {
+      if (layer == 0) {
+        this.drawBullet(effect, true)
+      }
+      return 0
+    } 
+    if (layer == 1) {
+      this.context.save()
+      const canvasCoords = this.viewport.toCanvas(effect.position)
+      this.context.translate(canvasCoords.x, canvasCoords.y)
+      // console.log(this.images, effect.type)
+      this.drawCenteredImage(this.images[effect.type])
+      this.context.restore()
+    }
   }
 
   /**

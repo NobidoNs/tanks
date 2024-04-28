@@ -179,6 +179,8 @@ class Game {
 
       this.drawing.drawTiles()
 
+      this.beauty.forEach(element => {this.drawing.drawBeauty(element, 0)})
+
       this.projectiles.forEach(this.drawing.drawBullet.bind(this.drawing))
 
       this.powerups.forEach(this.drawing.drawPowerup.bind(this.drawing))
@@ -187,7 +189,7 @@ class Game {
 
       this.drawing.drawTank(true, this.self)
 
-      this.beauty.forEach(this.drawing.drawBeauty.bind(this.drawing))
+      this.beauty.forEach(element => {this.drawing.drawBeauty(element, 1)})
     }
   }
 }

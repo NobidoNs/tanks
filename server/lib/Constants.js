@@ -143,5 +143,10 @@ module.exports = {
     'dash': 10,
     'invis': 10,
     'bomb': 10
+  },
+
+  VISUAL_DURATION: {
+    'bullets': 3000,
+    'explosion': 300
   }
 }

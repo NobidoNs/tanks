@@ -71,7 +71,7 @@ class Bullet extends Entity {
     if (Util.randRangeInt(1,3) == 1) {y*=-1}
     const inWorldX = player['position']['x']-x
     const inWorldY = player['position']['y']-y
-    const vel = Util.randRange(0.5,1.5)
+    const vel = Util.randRange(0.4,0.9)
     const angle = Math.atan2(y, x)
     return [
       new Bullet(

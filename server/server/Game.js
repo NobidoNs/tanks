@@ -1,6 +1,7 @@
 /**
 todo:
   visual effects
+  recoil
   scaner
   multi shoot
   minimap*
@@ -203,8 +204,13 @@ class Game {
     this.deltaTime = currentTime - this.lastUpdateTime
     this.lastUpdateTime = currentTime
     this.badBullets(currentTime)
+
     this.beauty.forEach(
-      effect => {effect.update(this.lastUpdateTime)}
+      effect => {
+        if (this.lastUpdateTime > effect['endTime']) {
+          effect['destroyed']=true
+        }
+      }
     )
     /**
      * Perform a physics update and collision update for all entities
@@ -224,6 +230,11 @@ class Game {
         let e2 = entities[j]
         if (!e1.collided(e2)) {
           continue
+        }
+
+        if (e1 instanceof Player && e2 instanceof Player) {
+          e1.applyEffect('slime')
+          e2.applyEffect('slime')
         }
 
         // Player-Bullet collision interaction
@@ -282,8 +293,13 @@ class Game {
         } 
 
         // Bullet-Bullet interaction
-        if (e1 instanceof Bullet && e2 instanceof Bullet &&
-          e1.source !== e2.source) {
+        if (e1 instanceof Bullet && e2 instanceof Bullet) {
+          let e1_copy = {...e1}
+          e1_copy['endTime'] = this.lastUpdateTime+Constants.VISUAL_DURATION['bullets']
+          let e2_copy = {...e2}
+          e2_copy['endTime'] = this.lastUpdateTime+Constants.VISUAL_DURATION['bullets']
+          this.beauty.push(e1_copy, e2_copy)
+
           e1.destroyed = true
           e2.destroyed = true
         }
@@ -311,7 +327,8 @@ class Game {
           e2.destroyed = true
           const creator = this.players.get(e1.creator)
           creator.damage(e1.data+e2.data)
-          this.beauty.push(Beauty.create(e1.position,'powPowBoom',300, this.lastUpdateTime))
+          this.beauty.push(Beauty.create(
+            e1.position,'powPowBoom',Constants.VISUAL_DURATION['explosion'], this.lastUpdateTime))
           if (creator.isDead()) {
             creator.spawn()
             creator.deaths++
