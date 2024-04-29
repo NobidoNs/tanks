@@ -80,7 +80,7 @@ class Drawing {
    *   denote an enemy tank.
    * @param {Player} player The player object to draw.
    */
-  drawTank(isSelf, player) {
+  drawTank(isSelf, player, scaner=false, scanerAngle=NaN) {
     let part = 1
     if (player['invis']) {
       const deltaTime = player['lastUpdateTime']-player['startCasteTime']
@@ -130,6 +130,12 @@ class Drawing {
     ], 1/part)
     this.context.rotate(-Drawing.translateAngle(player.tankAngle))
 
+    if (scaner) {
+      this.context.rotate(Drawing.translateAngle(scanerAngle+Math.PI))
+      this.drawCenteredImage(this.images[Constants.DRAWING_IMG_SCANER])
+      this.context.rotate(Drawing.translateAngle(-scanerAngle))
+    }
+
     this.context.rotate(Drawing.translateAngle(player.turretAngle))
 
     let turret = Constants.DRAWING_IMG_TURRET
@@ -145,6 +151,15 @@ class Drawing {
 
     this.context.restore()
   }
+
+  // drawScaner(player, angle) {
+  //   // this.context.save()
+  //   // const canvasCoords = this.viewport.toCanvas(player.position)
+  //   // this.context.translate(canvasCoords.x, canvasCoords.y)
+
+  //   // this.context.rotate(Drawing.translateAngle(angle))
+  //   this.drawCenteredImage(this.images[Constants.DRAWING_IMG_SCANER])
+  // }
 
   /**
    * Draws a bullet (tank shell) to the canvas.

@@ -64,6 +64,12 @@ class TalantTree {
         access: false,
         address: "9,5"
       },
+      'scaner':{
+        parents: ['collecter'],
+        childs: [],
+        access: false,
+        address: "7,5"
+      },
     }
 
     this.address = {
@@ -76,7 +82,8 @@ class TalantTree {
       "9,1":'mag_stun',
       "8,6":'dash',
       "8,7":'invis',
-      "9,5":'bomb'
+      "9,5":'bomb',
+      "7,5":'scaner'
     }
   }
 
@@ -89,6 +96,9 @@ class TalantTree {
       const name = this.getName(address)
       if (name != undefined) {
         let ret = this.unlockIfCan(name)
+        if (address == this.talantTree['scaner']['address']) {
+          return 'scaner'
+        }
         return ret
       }
     }

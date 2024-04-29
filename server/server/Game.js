@@ -198,7 +198,7 @@ class Game {
 
   /**
    * Updates the state of all the objects in the game.
-   */
+   */  
   update() {
     const currentTime = Date.now()
     this.deltaTime = currentTime - this.lastUpdateTime
@@ -223,7 +223,14 @@ class Game {
     ]
 
     entities.forEach(
-      entity => { entity.update(this.lastUpdateTime, this.deltaTime) })
+      entity => {
+        if (entity instanceof Player) {
+          entity.update(this.lastUpdateTime, this.deltaTime, Array.from(this.players.values()))
+        } else {
+          entity.update(this.lastUpdateTime, this.deltaTime)
+        }
+      }
+    )
     for (let i = 0; i < entities.length; ++i) {
       for (let j = i + 1; j < entities.length; ++j) {
         let e1 = entities[i]

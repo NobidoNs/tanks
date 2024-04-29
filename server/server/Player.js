@@ -59,6 +59,8 @@ class Player extends Entity {
     this.imgs = []
 
     this.desired = []
+    this.scaner = false
+    this.scanerAngle = NaN
     this.powerups = {}
     this.effects = {}
     this.block = []
@@ -119,7 +121,8 @@ class Player extends Entity {
    * @param {number} lastUpdateTime The last timestamp an update occurred
    * @param {number} deltaTime The timestep to compute the update with
    */
-  update(lastUpdateTime, deltaTime) {
+  update(lastUpdateTime, deltaTime, positions) {
+    this.scanerUpdate(positions)
     this.lastUpdateTime = lastUpdateTime
     this.position.add(Vector.scale(this.velocity, deltaTime))
     this.boundToWorld()
@@ -131,6 +134,23 @@ class Player extends Entity {
     }
     this.updatePowerups()
     this.updateEffects()
+  }
+
+  scanerUpdate(pls) {
+    if (this.scaner == true) {
+      let smalest = [-1,0]
+      pls.forEach(player => {
+        const pos = player['position']
+        const delta = Math.abs(pos['x']-this.position['x'])+Math.abs(pos['y']-this.position['y'])
+        if (delta != 0 && (delta < smalest[0] || smalest[0] == -1)) {
+          smalest = [delta,pos]
+        }
+      })
+      const playerPosition = smalest[1]
+      const playerToPlayerVector = Vector.sub(this.position, playerPosition)
+      const scanerAngle = Util.normalizeAngle(playerToPlayerVector.angle + Math.PI)
+      this.scanerAngle = scanerAngle
+    }
   }
 
   doDash() {
@@ -164,9 +184,12 @@ class Player extends Entity {
     const price = Constants.PRICES[this.talants.getName(address)]
     if (price <= this.energy) {
       const result = this.talants.unlock(address)
-      if (result == true) {
+      if (result == true || result == 'scaner') {
         this.updateTable = [true, address]
         this.energyAdd(-price)
+        if (result == 'scaner') {
+          this.scaner = true
+        }
       }
     }
   }

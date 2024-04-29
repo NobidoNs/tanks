@@ -40,6 +40,8 @@ class Game {
     this.input = input
     this.leaderboard = leaderboard
     this.cooldowns = cooldowns
+    this.scanerAngle = NaN
+    this.scaner = false
 
     this.self = null
     this.players = []
@@ -109,6 +111,8 @@ class Game {
     this.leaderboard.update(state.players)
     this.cooldowns.update(state.players)
     this.tb.pasteImages(state.self.imgs)
+    this.scanerAngle = state.self.scanerAngle
+    this.scaner = state.self.scaner
   }
 
   /**
@@ -184,7 +188,7 @@ class Game {
 
       this.players.forEach(tank => {if (tank.socketID!=this.self.socketID) {this.drawing.drawTank(false, tank)}})
 
-      this.drawing.drawTank(true, this.self)
+      this.drawing.drawTank(true, this.self, this.scaner, this.scanerAngle)
 
       this.beauty.forEach(element => {this.drawing.drawBeauty(element, 1)})
     }
