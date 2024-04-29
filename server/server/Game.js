@@ -1,18 +1,18 @@
 /**
+features:
+  minimap
+  stun bomb
+  gun recoil
+  particles
 todo:
-  visual effects
-  recoil
   scaner
   multi shoot
-  minimap*
   blast
-  stun bomb
   add button name in icons
   can learn spell/gun
  */
 
 const Bullet = require('./Bullet')
-const TalantTree = require('./talantTree')
 const Player = require('./Player')
 const Powerup = require('./Powerup')
 const Beauty = require('./VisualEffect')
@@ -263,13 +263,15 @@ class Game {
                   e1.applyEffect('stun')
                 }
                 e1.damage(e2.damage)
+
                 if (e1.isDead()) {
-                  e1.spawn()
+                  e1.spawn(true)
                   e1.deaths++
                   if (e2.type != 'badBullet') {
                     e2.source.kills++
                   }
                 }
+
               }
             }
 
@@ -285,7 +287,7 @@ class Game {
           e1.applyPowerup(e2)
           e2.destroyed = true
           if (e1.isDead()) {
-            e1.spawn()
+            e1.spawn(true)
             e1.deaths++
             this.players.get(e2.creator)['kills']++
             // e2.source.kills++
@@ -330,7 +332,7 @@ class Game {
           this.beauty.push(Beauty.create(
             e1.position,'powPowBoom',Constants.VISUAL_DURATION['explosion'], this.lastUpdateTime))
           if (creator.isDead()) {
-            creator.spawn()
+            creator.spawn(true)
             creator.deaths++
           }
         }

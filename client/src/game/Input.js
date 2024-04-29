@@ -61,6 +61,7 @@ class Input {
     case 40:
     case 83:
       this.down = true
+      break
     case 81:
       this.gun = 'collecter'
       break
@@ -169,8 +170,6 @@ class Input {
    */
   onMouseMove(event) {
     this.mouseCoords = [event.clientX, event.clientY]
-    // console.log(this.mouseCoords)
-    // console.log([event.clientX, event.clientY])
   }
 
   /**

@@ -150,11 +150,7 @@ class Drawing {
    * Draws a bullet (tank shell) to the canvas.
    * @param {Bullet} bullet The bullet to draw to the canvas
    */
-  drawBullet(bullet, debug=false) {
-    if (debug == true) {
-      console.log(bullet)
-    }
-
+  drawBullet(bullet) {
     let img = ''
     switch (bullet.type) {
     case "pipeBullet":
@@ -192,7 +188,6 @@ class Drawing {
    * @param {Powerup} powerup The powerup to draw
    */
   drawPowerup(powerup) {
-    // console.log(this.images[powerup.type])
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(powerup.position)
     this.context.translate(canvasCoords.x, canvasCoords.y)
@@ -201,10 +196,9 @@ class Drawing {
   }
 
   drawBeauty(effect, layer) {
-    // console.log(effect)
     if (effect.type.includes('Bullet')) {
       if (layer == 0) {
-        this.drawBullet(effect, true)
+        this.drawBullet(effect)
       }
       return 0
     } 
@@ -212,7 +206,6 @@ class Drawing {
       this.context.save()
       const canvasCoords = this.viewport.toCanvas(effect.position)
       this.context.translate(canvasCoords.x, canvasCoords.y)
-      // console.log(this.images, effect.type)
       this.drawCenteredImage(this.images[effect.type])
       this.context.restore()
     }

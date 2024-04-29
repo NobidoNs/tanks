@@ -72,7 +72,6 @@ class Viewport extends Entity {
    * @return {Vector}
    */
   toWorld(position) {
-    // console.log(this.position)
     return Vector.add(position, this.position)
   }
 }

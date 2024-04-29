@@ -1,4 +1,5 @@
 const $ = require('jquery')
+const Constants = require('lib/Constants')
 class Table {
   constructor(container) {
     this.container = container
@@ -32,13 +33,31 @@ class Table {
   }
 
   update(show, updateTable=[false]) {
-    if (updateTable[0]) {this.changeTd(updateTable[1], 'rgba(0, 236, 194, 0.7)')}
+    if (updateTable[0]) {
+      if (updateTable[1] == 'updateAll') {
+        this.resetTable()
+      } else {
+        this.changeTd(updateTable[1], 'rgba(0, 236, 194, 0.7)')
+      }
+    }
     if (show) {
       $('#talantTree').show()
     } else {$('#talantTree').hide()}
   }
 
-  changeTd(xy,color,src="img/empty.png") {
+  resetTable() {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        let color = 'rgba(91, 91, 133, 0.69)'
+        if (i==Math.floor(this.rows/2) && j==Math.floor(this.cols/2)) {
+          color = 'rgba(0, 236, 194, 0.7)'
+        }
+        this.changeTd([i,j],color)
+      }
+    }
+  }
+
+  changeTd(xy,color) {
     const x = xy[0]
     const y = xy[1]
     const cels = $("td");

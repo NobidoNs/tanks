@@ -72,9 +72,6 @@ class Game {
     // screen.height return bad answer (9.2 is pick coefficent)
     canvas.height = window.screen.height-window.screen.height/9.2 
 
-    // console.log(canvas)
-    // console.log(window.screen.height, window.screen.width)
-
     const viewport = Viewport.create(canvas)
     const drawing = Drawing.create(canvas, viewport)
     const input = Input.create(document, canvas, talantTree)

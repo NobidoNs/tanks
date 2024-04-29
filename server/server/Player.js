@@ -354,14 +354,25 @@ class Player extends Entity {
   /**
    * Handles the spawning (and respawning) of the player.
    */
-  spawn() {
+  spawn(respawn = false) {
     this.position = new Vector(
       Util.randRange(Constants.WORLD_MIN + Constants.WORLD_PADDING,
         Constants.WORLD_MAX - Constants.WORLD_PADDING),
       Util.randRange(Constants.WORLD_MIN + Constants.WORLD_PADDING,
         Constants.WORLD_MAX - Constants.WORLD_PADDING))
     this.angle = Util.randRange(0, 2 * Math.PI)
-    this.health = Constants.PLAYER_MAX_HEALTH
+    if (respawn == true) {
+      this.health = Constants.PLAYER_MAX_HEALTH
+      this.energy = Constants.PLAYER_START_ENERGY
+      this.gun = 'collecter'
+      this.invis = false
+      this.desired = []
+      this.powerups = {}
+      this.effects = {}
+      this.block = []
+      this.talants = new TalantTree()
+      this.updateTable = [true, 'updateAll']
+    }
   }
 }
 
