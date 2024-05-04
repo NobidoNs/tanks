@@ -46,7 +46,7 @@ class Player extends Entity {
     this.lastDashTime = 0
     this.lastBombTime = 0
     this.lastBadBulletSummon = 0
-    this.deltaSummon = 0
+    this.deltaSummon = 1000
 
     this.health = Constants.PLAYER_MAX_HEALTH
     this.energy = Constants.PLAYER_START_ENERGY
@@ -332,14 +332,14 @@ class Player extends Entity {
    */
   getProjectilesFromShot(velocity, type) {
     const bullets = [Bullet.createFromPlayer(this, 0, velocity, type)]
-    const shotgunPowerup = this.powerups[Constants.POWERUP_SHOTGUN]
-    if (shotgunPowerup) {
-      for (let i = 1; i <= shotgunPowerup.data; ++i) {
-        const angleDeviation = i * Math.PI / 9
-        bullets.push(Bullet.createFromPlayer(this, -angleDeviation))
-        bullets.push(Bullet.createFromPlayer(this, angleDeviation))
-      }
-    }
+    // const shotgunPowerup = this.powerups[Constants.POWERUP_SHOTGUN]
+    // if (shotgunPowerup) {
+    //   for (let i = 1; i <= shotgunPowerup.data; ++i) {
+    //     const angleDeviation = i * Math.PI / 9
+    //     bullets.push(Bullet.createFromPlayer(this, -angleDeviation))
+    //     bullets.push(Bullet.createFromPlayer(this, angleDeviation))
+    //   }
+    // }
     this.lastShotTime = this.lastUpdateTime
     return bullets
   }

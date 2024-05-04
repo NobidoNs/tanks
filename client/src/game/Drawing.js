@@ -189,6 +189,9 @@ class Drawing {
     case "mag_stunBullet":
       img = Constants.DRAWING_IMG_mag_STUN_BULLET
       break
+    case "blasterBullet":
+      img = Constants.DRAWING_IMG_BLASTER_BULLET
+      break
     }
     this.context.save()
     const canvasCoords = this.viewport.toCanvas(bullet.position)

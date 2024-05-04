@@ -27,7 +27,15 @@
     "webpack-cli": "^3.2.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.2.0",
     "css-loader": "^2.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.1.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.5.0",

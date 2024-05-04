@@ -5,9 +5,6 @@ features:
   gun recoil
   particles
 todo:
-  scaner
-  multi shoot
-  blast
   add button name in icons
   can learn spell/gun
  */
@@ -162,6 +159,13 @@ class Game {
             player.energyAdd(-Constants.SHOOT_ENERGIES['mag_stun'])
           }
           break
+        case 'blaster':
+          if (player.energy>=Constants.SHOOT_ENERGIES['blaster']) {
+            const projectiles = player.getProjectilesFromShot(-1, 'blasterBullet')
+            this.projectiles.push(...projectiles)
+            player.energyAdd(-Constants.SHOOT_ENERGIES['blaster'])
+          }
+          break
       }
     }
   }
@@ -173,6 +177,20 @@ class Game {
 
     if (data.bomb && player.canBomb()) {
       this.powerups.push(player.doBomb())
+    }
+
+    if (data.blast) {
+      this.projectiles.forEach(entity => {
+        if (entity.type == 'blasterBullet' && entity.source.socketID == player.socketID) {
+          const bullets = []
+          const angles = Util.getAnglesFromCount(8)
+          angles.forEach(angle => {
+            bullets.push(Bullet.createFromPos(entity.position, player, angle, 0, 'pipeBullet'))
+          })
+          entity.destroyed = true
+          this.projectiles.push(...bullets)
+        }
+      })
     }
 
     if (data.invis && player.canInvis()) {
@@ -188,7 +206,7 @@ class Game {
       player => {
         if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
           player.lastBadBulletSummon = curTime
-          player.deltaSummon = Util.randRangeInt(2000, 4000)
+          player.deltaSummon = Util.randRangeInt(200000, 400000)
           const projectiles = Bullet.summonBadBullet(player, 'badBullet')
           this.projectiles.push(...projectiles)
         }
@@ -302,8 +320,9 @@ class Game {
         } 
 
         // Bullet-Bullet interaction
-        if (e1 instanceof Bullet && e2 instanceof Bullet) {
-          let e1_copy = {...e1}
+        if (e1 instanceof Bullet && e2 instanceof Bullet 
+        && e1.source !== e2.source) {
+          let e1_copy = { ...e1 }
           e1_copy['endTime'] = this.lastUpdateTime+Constants.VISUAL_DURATION['bullets']
           let e2_copy = {...e2}
           e2_copy['endTime'] = this.lastUpdateTime+Constants.VISUAL_DURATION['bullets']
@@ -311,6 +330,7 @@ class Game {
 
           e1.destroyed = true
           e2.destroyed = true
+          console.log(e1,e2)
         }
 
         // Bullet-Powerup interaction

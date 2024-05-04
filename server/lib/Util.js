@@ -95,6 +95,14 @@ const delElementFromArray = (array,element) => {
   return array
 } 
 
+const getAnglesFromCount = (count) => {
+  const ret = []
+  for (let i = 0; i <= count; i++) {
+    ret.push((2*Math.PI/count)*i)
+  }
+  return ret
+}
+
 module.exports = {
   normalizeAngle,
   inBound,
@@ -102,5 +110,6 @@ module.exports = {
   randRange,
   randRangeInt,
   choiceArray,
-  delElementFromArray
+  delElementFromArray,
+  getAnglesFromCount
 }

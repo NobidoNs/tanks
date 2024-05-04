@@ -24,7 +24,6 @@ module.exports = {
   DRAWING_IMG_mag_STUN_TURRET: 'guns/mag_stun_turret',
   DRAWING_IMG_TURRET: 'guns/turret',
   DRAWING_IMG_OTHER_TANK: 'other_tank',
-  DRAWING_IMG_OTHER_TURRET: 'other_turret',
   DRAWING_IMG_SHIELD: 'shield',
   DRAWING_IMG_PIPE_BULLET: 'bullets/pipe_bullet',
   DRAWING_IMG_BAD_BULLET: 'bullets/badBullet',
@@ -33,13 +32,14 @@ module.exports = {
   DRAWING_IMG_SLIME_BULLET: 'bullets/slime_bullet',
   DRAWING_IMG_phis_STUN_BULLET: 'bullets/phis_stun_bullet',
   DRAWING_IMG_mag_STUN_BULLET: 'bullets/mag_stun_bullet',
+  DRAWING_IMG_BLASTER_BULLET: 'bullets/blaster_bullet',
   DRAWING_IMG_POWPOWBOOM: 'powPowBoom',
   DRAWING_IMG_SCANER: 'scaner',
   DRAWING_IMG_TILE: 'hexaTile',
   DRAWING_IMG_KEYS: [
-    'self_tank', 'powPowBoom', 'guns/turret', 'other_tank', 'other_turret', 'shield', 'scaner',
+    'self_tank', 'powPowBoom', 'guns/turret', 'other_tank', 'shield', 'scaner',
     'bullets/pipe_bullet', 'bullets/lazer_bullet', 'bullets/slime_bullet', 'hexaTile', 'bullets/badBullet', 
-    'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret',
+    'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret', 'bullets/blaster_bullet',
     'guns/lazer_turret', 'guns/slime_turret', 'guns/phis_stun_turret', 'bullets/phis_stun_bullet',
     'guns/mag_stun_turret', 'bullets/mag_stun_bullet',
   ],
@@ -119,9 +119,10 @@ module.exports = {
   SHOOT_ENERGIES: {
     'lazer':5,
     'illusion':5,
-    'slime':5,
-    'phis_stun':5,
-    'mag_stun':5,
+    'slime':7,
+    'phis_stun':10,
+    'mag_stun':10,
+    'blaster':10
   },
 
   GUN_TYPES: {
@@ -131,7 +132,8 @@ module.exports = {
     'illusion': 'guns/illusion_turret',
     'slime': 'guns/slime_turret',
     'phis_stun': 'guns/phis_stun_turret',
-    'mag_stun': 'guns/mag_stun_turret'
+    'mag_stun': 'guns/mag_stun_turret',
+    'blaster': 'guns/blaster_turret'
   },
   PRICES:{
     'pipe': 5,
@@ -144,7 +146,8 @@ module.exports = {
     'dash': 10,
     'invis': 10,
     'bomb': 10,
-    'scaner': 30
+    'scaner': 30,
+    'blaster': 30
   },
 
   VISUAL_DURATION: {

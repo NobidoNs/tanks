@@ -20,6 +20,7 @@ class Input {
     this.talantTree = false
     this.invis = false
     this.bomb = false
+    this.blast = false
     this.gun = 'collecter'
     this.mouseDown = false
     this.mouseCoords = [0, 0]
@@ -83,11 +84,17 @@ class Input {
     case 90:
       this.gun = 'mag_stun'
       break
+    case 86:
+      this.gun = 'blaster'
+      break
     case 32:
       this.dash = true
       break
     case 50:
       this.bomb = true
+      break
+    case 20:
+      this.blast = true
       break
     case 49:
       if (this.invis == false) {
@@ -134,6 +141,9 @@ class Input {
       break
     case 50:
       this.bomb = false
+      break
+    case 20:
+      this.blast = false
       break
     case 16:
       this.talantTree = false

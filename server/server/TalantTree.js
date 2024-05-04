@@ -12,61 +12,56 @@ class TalantTree {
       },
       'pipe':{
         parents: ['collecter'],
-        childs: ['lazer', 'illusion'],
         access: false,
         address: "8,4"
       },
       'lazer':{
         parents: ['pipe'],
-        childs: [],
         access: false,
         address: "7,3"
       },
       'illusion':{
         parents: ['pipe'],
-        childs: [],
         access: false,
         address: "9,3"
       },
       'slime':{
         parents: ['lazer', 'illusion'],
-        childs: ['phis_stun','mag_stun'],
         access: false,
         address: "8,2"
       },
       'phis_stun':{
         parents: ['slime'],
-        childs: [],
         access: false,
         address: "7,1"
       },
       'mag_stun':{
         parents: ['slime'],
-        childs: [],
         access: false,
         address: "9,1"
       },
       'dash':{
         parents: ['collecter'],
-        childs: ['invis'],
         access: false,
         address: "8,6"
       },
       'invis':{
         parents: ['dash'],
-        childs: [],
         access: false,
         address: "8,7"
       },
       'bomb':{
         parents: ['collecter'],
-        childs: [],
         access: false,
         address: "9,5"
       },
+      'blaster':{
+        parents: ['bomb', 'illusion'],
+        access: false,
+        address: "10,4"
+      },
       'scaner':{
         parents: ['collecter'],
-        childs: [],
         access: false,
         address: "7,5"
       },
@@ -83,7 +78,8 @@ class TalantTree {
       "8,6":'dash',
       "8,7":'invis',
       "9,5":'bomb',
-      "7,5":'scaner'
+      "7,5":'scaner',
+      "10,4":'blaster'
     }
   }
 

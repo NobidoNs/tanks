@@ -161,6 +161,7 @@ class Game {
         gun: this.input.gun,
         dash: this.input.dash,
         bomb: this.input.bomb,
+        blast: this.input.blast,
         invis: this.input.invis,
         desired: this.desired
       })

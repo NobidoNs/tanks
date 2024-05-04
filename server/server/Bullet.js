@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 /**
  * This class stores the state of a bullet on the server.
  * @author alvin@omgimanerd.tech (Alvin Lin)
@@ -28,6 +29,7 @@ class Bullet extends Entity {
 
     this.damage = Constants.BULLET_DEFAULT_DAMAGE+this.velocity.mag2
     this.distanceTraveled = 0
+    this.cerateTime = source.lastUpdateTime
     this.destroyed = false
     this.type = type
   }
@@ -50,6 +52,16 @@ class Bullet extends Entity {
     )
   }
 
+  static createFromPos(pos, source, angle, velocity, type) {
+    return new Bullet(
+      pos.copy(),
+      Vector.fromPolar(Constants.BULLET_SPEED+velocity, angle),
+      angle,
+      source,
+      type
+    )
+  }
+
   /**
    * Performs a physics update.
    * @param {number} lastUpdateTime The last timestamp an update occurred
@@ -65,21 +77,21 @@ class Bullet extends Entity {
   }
 
   static summonBadBullet(player, type) {
-    let x = Util.randRangeInt(50,500)
-    let y = Util.randRangeInt(50,500)
-    if (Util.randRangeInt(1,3) == 1) {x*=-1}
-    if (Util.randRangeInt(1,3) == 1) {y*=-1}
-    const inWorldX = player['position']['x']-x
-    const inWorldY = player['position']['y']-y
+    let x = Util.randRangeInt(50, 500)
+    let y = Util.randRangeInt(50, 500)
+    if (Util.randRangeInt(1, 3) === 1) { x *= -1 }
+    if (Util.randRangeInt(1, 3) === 1) { y *= -1 }
+    const inWorldX = player.position.x - x
+    const inWorldY = player.position.y - y
     const vel = Util.randRange(0.4,0.9)
     const angle = Math.atan2(y, x)
     return [
       new Bullet(
-      Vector.fromArray([inWorldX,inWorldY]),
-      Vector.fromPolar(vel, angle),
-      angle,
-      player,
-      type
+        Vector.fromArray([inWorldX, inWorldY]),
+        Vector.fromPolar(vel, angle),
+        angle,
+        player,
+        type
       )
     ]
   }

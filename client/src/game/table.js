@@ -49,7 +49,7 @@ class Table {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         let color = 'rgba(91, 91, 133, 0.69)'
-        if (i==Math.floor(this.rows/2) && j==Math.floor(this.cols/2)) {
+        if (i==Math.floor(this.cols/2) && j==Math.floor(this.rows/2)) {
           color = 'rgba(0, 236, 194, 0.7)'
         }
         this.changeTd([i,j],color)
