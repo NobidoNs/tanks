@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/penumbragames/tankanarchy/issues"
   },
+
   "homepage": "https://github.com/penumbragames/tankanarchy#readme",
   "dependencies": {
     "express": "^4.16.4",

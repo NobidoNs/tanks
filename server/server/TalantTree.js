@@ -1,6 +1,3 @@
-const Constants = require('../lib/Constants')
-const Util = require('../lib/Util')
-
 class TalantTree {  
   constructor() {
     this.talantTree = {

@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 /* eslint-disable require-jsdoc */
 /**
  * This class stores the state of a bullet on the server.
@@ -77,8 +78,8 @@ class Bullet extends Entity {
   }
 
   static summonBadBullet(player, type) {
-    let x = Util.randRangeInt(50, 500)
-    let y = Util.randRangeInt(50, 500)
+    let x = Util.randRangeInt(250, 500)
+    let y = Util.randRangeInt(250, 500)
     if (Util.randRangeInt(1, 3) === 1) { x *= -1 }
     if (Util.randRangeInt(1, 3) === 1) { y *= -1 }
     const inWorldX = player.position.x - x

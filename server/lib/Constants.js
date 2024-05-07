@@ -22,6 +22,7 @@ module.exports = {
   DRAWING_IMG_SLIME_TURRET: 'guns/slime_turret',
   DRAWING_IMG_phis_STUN_TURRET: 'guns/phis_stun_turret',
   DRAWING_IMG_mag_STUN_TURRET: 'guns/mag_stun_turret',
+  DRAWING_IMG_BLASTER_TURRET: 'guns/blaster_turret',
   DRAWING_IMG_TURRET: 'guns/turret',
   DRAWING_IMG_OTHER_TANK: 'other_tank',
   DRAWING_IMG_SHIELD: 'shield',
@@ -41,7 +42,7 @@ module.exports = {
     'bullets/pipe_bullet', 'bullets/lazer_bullet', 'bullets/slime_bullet', 'hexaTile', 'bullets/badBullet', 
     'bullets/illusionBullet', 'guns/collect_turret', 'guns/illusion_turret', 'bullets/blaster_bullet',
     'guns/lazer_turret', 'guns/slime_turret', 'guns/phis_stun_turret', 'bullets/phis_stun_bullet',
-    'guns/mag_stun_turret', 'bullets/mag_stun_bullet',
+    'guns/mag_stun_turret', 'bullets/mag_stun_bullet', 'guns/blaster_turret',
   ],
   DRAWING_TILE_SIZE: 364,
 
@@ -85,7 +86,6 @@ module.exports = {
   POWERUP_RAPIDFIRE: 'rapidfire',
   POWERUP_SPEEDBOOST: 'speedboost',
   POWERUP_SHIELD: 'shield',
-  POWERUP_BOMB: 'bomb',
   POWERUP_KEYS: [
     'healthpack',
     'bomb'
