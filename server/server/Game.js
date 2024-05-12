@@ -120,10 +120,11 @@ class Game {
   tryShoot(needShoot, player) {
     if (needShoot && player.canShoot()) {
       switch (player.gun) {
-        case 'pipe':
+        case 'pipe': {
           const projectiles = player.getProjectilesFromShot(-1, 'pipeBullet')
           this.projectiles.push(...projectiles)
           break
+        }
         case 'lazer': 
           if (player.energy>=Constants.SHOOT_ENERGIES['lazer']) {
             const projectiles = player.getProjectilesFromShot(2, 'lazerBullet')
@@ -131,7 +132,7 @@ class Game {
             player.energyAdd(-Constants.SHOOT_ENERGIES['lazer'])
           }
           break
-        case 'illusion': 
+        case 'illusion':
           if (player.energy>=Constants.SHOOT_ENERGIES['illusion']) {
             const projectiles = player.getProjectilesFromShot(-1, 'illusionBullet')
             this.projectiles.push(...projectiles)
@@ -206,7 +207,7 @@ class Game {
       player => {
         if (curTime > player.lastBadBulletSummon+player.deltaSummon) {
           player.lastBadBulletSummon = curTime
-          player.deltaSummon = Util.randRangeInt(200000, 400000)
+          player.deltaSummon = Util.randRangeInt(2000, 4000)
           const projectiles = Bullet.summonBadBullet(player, 'badBullet')
           this.projectiles.push(...projectiles)
         }

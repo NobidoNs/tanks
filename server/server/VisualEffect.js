@@ -1,6 +1,3 @@
-const Constants = require('../lib/Constants')
-const Util = require('../lib/Util')
-
 class Beauty {  
   constructor(position, type, duration, cur_time, data={}) {
     this.type = type

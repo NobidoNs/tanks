@@ -71,8 +71,7 @@ class Game {
     const canvas = document.getElementById(canvasElementID)
     const talantTree = document.getElementById(talantTreeID)
     canvas.width = window.screen.width
-    // screen.height return bad answer (9.2 is pick coefficent)
-    canvas.height = window.screen.height-window.screen.height/9.2 
+    canvas.height = window.screen.height
 
     const viewport = Viewport.create(canvas)
     const drawing = Drawing.create(canvas, viewport)
