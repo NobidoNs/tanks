@@ -23,37 +23,37 @@ $(document).ready(() => {
 
   $('#name-input').focus()
 
-  const name = 'tim'
-  console.log('new-pl')
-  socket.emit('new-player', { name }, () => {
-    $('#name-prompt-overlay').remove()
-    $('#canvas').focus()
-    game.run()
-  })
+  // const name = 'tim'
+  // console.log('new-pl')
+  // socket.emit('new-player', { name }, () => {
+  //   $('#name-prompt-overlay').remove()
+  //   $('#canvas').focus()
+  //   game.run()
+  // })
 
   /**
    * Function to send the player name to the server.
    * @return {false}
    */
-  // const sendName = () => {
-  //   const name = $('#name-input').val()
-  //   if (name && name.length < 20) {
-  //     $('#name-prompt-container').empty()
-  //     $('#name-prompt-container').append(
-  //       $('<span>').addClass('fa fa-2x fa-spinner fa-pulse'))
-  //     console.log('new-pl')
-  //     socket.emit('new-player', { name }, () => {
-  //       $('#name-prompt-overlay').remove()
-  //       $('#canvas').focus()
-  //       game.run()
-  //     })
-  //   } else {
-  //     window.alert('Your name cannot be blank or over 20 characters.')
-  //   }
-  //   return false
-  // }
-  // $('#name-form').submit(sendName)
-  // $('#name-submit').click(sendName)
+  const sendName = () => {
+    const name = $('#name-input').val()
+    if (name && name.length < 20) {
+      $('#name-prompt-container').empty()
+      $('#name-prompt-container').append(
+        $('<span>').addClass('fa fa-2x fa-spinner fa-pulse'))
+      console.log('new-pl')
+      socket.emit('new-player', { name }, () => {
+        $('#name-prompt-overlay').remove()
+        $('#canvas').focus()
+        game.run()
+      })
+    } else {
+      window.alert('Your name cannot be blank or over 20 characters.')
+    }
+    return false
+  }
+  $('#name-form').submit(sendName)
+  $('#name-submit').click(sendName)
 
   window.learn = function(row,col) {
     game.learn(row,col)

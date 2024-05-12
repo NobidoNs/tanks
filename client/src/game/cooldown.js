@@ -23,15 +23,18 @@ class Cooldown {
           $('#'+spells[i]+'-gif').show()
         } else {
           if (spells[i]=='dash') {
+            // debugger
             $('#dash_empty-img').show()
           }
-          $('#'+spells[i]+'-gif').hide()
+          $('#'+spells[i]+'-gif').hide() 
         }
       }
       if (player['invis'] == true) {
         $('#invis_active-img').show()
+        $('#invis_empty-img').hide()
       } else {
         $('#invis_active-img').hide()
+        $('#invis_empty-img').show()
       }
     }
   }

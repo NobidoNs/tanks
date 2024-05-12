@@ -27,13 +27,14 @@ const game = new Game()
 app.set('port', PORT)
 
 app.use(morgan('dev'))
-// app.use('/client', express.static(path.join(__dirname, '/client')))
-app.use('/dist', express.static(path.join(__dirname, '/dist')))
+app.use('/client', express.static(path.join(__dirname, '/client')))
+app.use('/img', express.static(path.join(__dirname, '/img')))
+// app.use('/dist', express.static(path.join(__dirname, '/dist')))
 
 // Routing Маршрутизация
-// app.get('/', (request, response) => {
-//   response.sendFile(path.join(__dirname, 'views/index.html'))
-// })
+app.get('/', (request, response) => {
+  response.sendFile(path.join(__dirname, 'views/index.html'))
+})
 
 /**
  * Server side input handler, modifies the state of the players and the
