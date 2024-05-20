@@ -12,11 +12,12 @@ const io = require('socket.io-client')
 
 const Chat = require('./game/Chat')
 const Game = require('./game/Game')
+const ServerUrl = require('../config.json')
 let ready = false
 let game = ''
 
 $(document).ready(() => {
-  const socket = io('http://localhost:5000')
+  const socket = io(ServerUrl['serverUrl'])
   game = Game.create(socket, 'canvas', 'leaderboard', 'talantTree')
   Chat.create(socket, 'chat-display', 'chat-input')
   ready = true
