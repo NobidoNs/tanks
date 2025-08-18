@@ -1,6 +1,5 @@
 const path = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+    HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const MASTER_JS_FILE = './src/client.js',
     MASTER_HTML_FILE = './src/index.html',
@@ -46,12 +45,15 @@ module.exports = env => {
 
         devtool: env.mode !== 'production'
             ? 'inline-source-map'
-            : 'none', // Disabled on production
+            : false,
 
         devServer: {
-            contentBase: `./${OUTPUT_FOLDER}`,
+            static: {
+                directory: path.resolve(__dirname, OUTPUT_FOLDER)
+            },
             compress: true,
-            port: 8000
+            port: 8000,
+            hot: true
         },
 
         plugins: getPlugins(env)
@@ -64,8 +66,7 @@ function getHtmlWebpackPluginOpt(env) {
         minify: {
             collapseInlineTagWhitespace: true,
             collapseWhitespace: true
-        },
-        inlineSource: '.(js|css)$'
+        }
     }
     return opt;
 }
@@ -73,7 +74,6 @@ function getHtmlWebpackPluginOpt(env) {
 function getPlugins(env) {
     const plugins = [
         new HtmlWebpackPlugin(getHtmlWebpackPluginOpt(env)),
-        // new HtmlWebpackInlineSourcePlugin()
     ];
     return plugins;
 }

@@ -5,7 +5,7 @@
  */
 
 const Bullet = require('./Bullet')
-const TalantTree = require('./talantTree')
+const TalantTree = require('./TalantTree')
 const Powerup = require('./Powerup')
 
 const Constants = require('../lib/Constants')

@@ -4,11 +4,10 @@
  * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
-require('/less/styles.less')
+require('less/styles.less')
 
 const $ = require('jquery')
-const io = require('socket.io-client')
-// const { io } = require("socket.io-client");
+const { io } = require('socket.io-client')
 
 const Chat = require('./game/Chat')
 const Game = require('./game/Game')

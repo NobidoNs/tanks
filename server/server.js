@@ -12,7 +12,7 @@ const express = require('express')
 const http = require('http')
 const morgan = require('morgan')
 const path = require('path')
-const socketIO = require('socket.io')
+const { Server } = require('socket.io')
 
 const Game = require('./server/Game')
 
@@ -21,15 +21,18 @@ const Constants = require('./lib/Constants')
 // Initialization. Инициализация
 const app = express()
 const server = http.Server(app)
-const io = socketIO(server)
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+})
 const game = new Game()
 // console.log(io)
 app.set('port', PORT)
 
 app.use(morgan('dev'))
-app.use('/client', express.static(path.join(__dirname, '/client')))
-app.use('/img', express.static(path.join(__dirname, '/img')))
-// app.use('/dist', express.static(path.join(__dirname, '/dist')))
+app.use(express.static(path.join(__dirname, 'dist')))
+app.use('/img', express.static(path.join(__dirname, 'img')))
 
 // Routing Маршрутизация
 app.get('/', (request, response) => {
