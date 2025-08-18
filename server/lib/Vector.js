@@ -1,9 +1,4 @@
 /**
- * @fileoverview Vector class for simple physics manipulations.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
-/**
  * Vector class.
  */
 class Vector {

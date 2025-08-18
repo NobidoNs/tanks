@@ -1,10 +1,3 @@
-/* eslint-disable valid-jsdoc */
-/* eslint-disable require-jsdoc */
-/**
- * This class stores the state of a bullet on the server.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const Constants = require('../lib/Constants')
 const Entity = require('../lib/Entity')
 const Vector = require('../lib/Vector')

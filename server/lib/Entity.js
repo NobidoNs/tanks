@@ -1,8 +1,3 @@
-/**
- * Wrapper class for all entities that need basic physics.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const Constants = require('./Constants')
 const Util = require('./Util')
 const Vector = require('./Vector')

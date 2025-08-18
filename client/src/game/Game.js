@@ -1,9 +1,3 @@
-/**
- * Class encapsulating the client side of the game, handles drawing and
- * updates.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const $ = require('jquery')
 
 const Drawing = require('./Drawing')

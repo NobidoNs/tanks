@@ -1,8 +1,3 @@
-/**
- * Manages the player viewport when they move around.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const Constants = require('lib/Constants')
 const Entity = require('lib/Entity')
 const Vector = require('lib/Vector')

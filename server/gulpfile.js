@@ -1,9 +1,3 @@
-/**
- * @fileoverview Gulpfile for compiling project assets.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-
 import * as del from 'del'
 import browserify from 'browserify'
 import gulp from 'gulp'
@@ -44,7 +38,7 @@ const compileTypescriptServer = () =>
 const watchTypescriptServer = () =>
   gulp.watch(serverTypescriptFiles, compileTypescriptServer)
 
-// TODO(omgimanerd): Catch errors in stream and fail gracefully
+
 const compileTypescriptClient = () =>
   browserify({
     entries: ['./src/client.ts'],

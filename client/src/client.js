@@ -1,9 +1,3 @@
-/**
- * Client side script that initializes the game. This should be the only script
- * that depends on JQuery.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 require('less/styles.less')
 
 const $ = require('jquery')

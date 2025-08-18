@@ -1,8 +1,3 @@
-/**
- * This class stores global constants between the client and server.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 module.exports = {
   WORLD_MIN: 0,
   WORLD_MAX: 3640,

@@ -1,6 +1,6 @@
 {
-  "name": "tankanarchy",
-  "version": "3.0.0",
+  "name": "HexCore",
+  "version": "2.0.0",
   "description": "A multiplayer tank battle arena game",
   "main": "server.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/penumbragames/tankanarchy.git"
+    "url": "git+https://github.com/NobidoNs/tanks"
   },
-  "author": "Alvin Lin (omgimanerd)",
+  "author": "NobidoNs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/penumbragames/tankanarchy/issues"
+    "url": "https://github.com/NobidoNs/tanks/issues"
   },
-  "homepage": "https://github.com/penumbragames/tankanarchy#readme",
+  "homepage": "https://github.com/NobidoNs/tanks#readme",
   "engines": {
     "node": ">=20.0.0"
   },

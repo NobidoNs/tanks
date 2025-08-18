@@ -1,10 +1,4 @@
 /**
- * This is a utility class containing utility methods used on the server and
- * client.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
-/**
  * Given an angle in radians, this function normalizes the angle to the range
  * 0 to 2 PI and returns the normalized angle.
  * @param {number} angle The angle to normalize

@@ -1,9 +1,3 @@
-/**
- * Stores the state of the player on the server. This class will also store
- * other important information such as socket ID, packet number, and latency.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const Bullet = require('./Bullet')
 const TalantTree = require('./TalantTree')
 const Powerup = require('./Powerup')

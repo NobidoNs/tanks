@@ -1,8 +1,3 @@
-/**
- * A class encapsulating the state of a powerup on the server.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
 const Constants = require('../lib/Constants')
 const Entity = require('../lib/Entity')
 const Util = require('../lib/Util')

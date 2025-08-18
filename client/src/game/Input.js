@@ -1,10 +1,4 @@
 /**
- * This class facilitates the tracking of user input, such as mouse clicks
- * and button presses.
- * @author alvin@omgimanerd.tech (Alvin Lin)
- */
-
-/**
  * Input class.
  */
 class Input {
