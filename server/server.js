@@ -1,7 +1,7 @@
 
 const PORT = process.env.PORT || 5000
 const FRAME_RATE = 1000 / 60
-const CHAT_TAG = '[Tank Anarchy]'
+const CHAT_TAG = '[HexCore]'
 //
 // Dependencies. Зависимости
 const express = require('express')
