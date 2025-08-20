@@ -10,8 +10,28 @@ class Cooldown {
       return new Cooldown(document.getElementById(containerElementID))
     }
 
-    update(pl=[]) {
-      const player = pl[0]
+    update(player) {
+      if (!player) { return }
+      // Update spells/abilities container to include only unlocked ones
+      try {
+        const talents = player.talants && player.talants.talantTree ? player.talants.talantTree : {}
+        const container = $('#spels-container')
+        if (container && Object.keys(talents).length > 0) {
+          container.empty()
+          // Spells we recognize for icons
+          const spellKeys = ['dash', 'invis', 'bomb', 'scaner']
+          const gunKeys = Object.keys(Constants.GUN_TYPES)
+          const unlockedSpells = spellKeys.filter(key => talents[key] && talents[key].access)
+          const unlockedGuns = gunKeys.filter(key => talents[key] && talents[key].access)
+          const addIcon = (name) => {
+            container.append(`<img src="img/icons/${name}.png" id='spell-img'/>`)
+          }
+          unlockedSpells.forEach(addIcon)
+          unlockedGuns.forEach(addIcon)
+        }
+      } catch (e) { /* no-op */ }
+
+      // Cooldown indicators
       const startTimes = Constants.START_SPELL_TIMES
       const spells = Constants.SPELLS
       for (let i = 0; i < startTimes.length; i++) {

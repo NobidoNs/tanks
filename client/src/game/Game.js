@@ -102,7 +102,7 @@ class Game {
     this.updateTable = state.self.updateTable
     this.viewport.updateTrackingPosition(state.self)
     this.leaderboard.update(state.players)
-    this.cooldowns.update(state.players)
+    this.cooldowns.update(state.self)
     this.tb.pasteImages(state.self.imgs)
     this.scanerAngle = state.self.scanerAngle
     this.scaner = state.self.scaner

@@ -6,10 +6,10 @@ const MASTER_JS_FILE = './src/client.js',
     OUTPUT_FOLDER = 'public',
     OUTPUT_MASTER_JS = '[name].bundle.js';
 
-module.exports = env => {
+module.exports = (env = {}, argv = {}) => {
 
     return {
-        mode: env.mode || 'none',
+        mode: argv.mode || env.mode || 'none',
 
         entry: {
             main: MASTER_JS_FILE
@@ -43,7 +43,7 @@ module.exports = env => {
             ]
         },
 
-        devtool: env.mode !== 'production'
+        devtool: (argv.mode || env.mode) !== 'production'
             ? 'inline-source-map'
             : false,
 
