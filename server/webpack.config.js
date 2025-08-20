@@ -39,6 +39,11 @@ module.exports = {
       jQuery: 'jquery',
     })
   ],
+  resolve: {
+    alias: {
+      'jquery': require.resolve('jquery')
+    }
+  },
   devtool: 'eval-cheap-source-map',
   mode: 'development'
 }
