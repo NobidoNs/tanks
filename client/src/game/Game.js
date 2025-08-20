@@ -6,9 +6,9 @@ const Leaderboard = require('./Leaderboard')
 const Viewport = require('./Viewport')
 const Table = require('./table')
 
-const Constants = require('lib/Constants')
-const Vector = require('lib/Vector')
-const Util = require('lib/Util')
+const Constants = require('../../../server/lib/Constants')
+const Vector = require('../../../server/lib/Vector')
+const Util = require('../../../server/lib/Util')
 const Cooldown = require('./cooldown')
 
 /**

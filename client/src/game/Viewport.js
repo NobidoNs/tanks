@@ -1,6 +1,6 @@
-const Constants = require('lib/Constants')
-const Entity = require('lib/Entity')
-const Vector = require('lib/Vector')
+const Constants = require('../../../server/lib/Constants')
+const Entity = require('../../../server/lib/Entity')
+const Vector = require('../../../server/lib/Vector')
 
 /**
  * Viewport class.

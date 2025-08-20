@@ -1,4 +1,4 @@
-require('less/styles.less')
+require('../less/styles.less')
 
 const $ = require('jquery')
 const { io } = require('socket.io-client')

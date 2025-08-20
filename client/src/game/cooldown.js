@@ -1,5 +1,5 @@
 const $ = require('jquery')
-const Constants = require('lib/Constants')
+const Constants = require('../../../server/lib/Constants')
 
 class Cooldown {
     constructor(container) {

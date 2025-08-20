@@ -1,5 +1,5 @@
-const Constants = require('lib/Constants')
-const Util = require('lib/Util')
+const Constants = require('../../../server/lib/Constants')
+const Util = require('../../../server/lib/Util')
 
 /**
  * Drawing class.

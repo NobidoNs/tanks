@@ -1,4 +1,4 @@
-const Constants = require('lib/Constants')
+const Constants = require('../../../server/lib/Constants')
 
 /**
  * Chat class.
