@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack",
+    "build": "echo \"yes\" | npm run build:original",
+    "build:original": "webpack --mode production",
     "postinstall": "webpack"
   },
   "repository": {
