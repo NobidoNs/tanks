@@ -4,10 +4,8 @@
   "description": "A multiplayer tank battle arena game",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo \"yes\" | npm run build:original",
-    "build:original": "webpack --mode production",
-    "postinstall": "webpack"
+    "build": "npm install && npx webpack --mode production",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
