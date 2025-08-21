@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build_client": "cd ../client && npm install && npx webpack --mode production",
-    "copy_client": "cp -r ../client/dist/* dist/",
+    "copy_client": "mkdir -p dist && cp -r ../client/dist/* dist/",
     "build": "npm run build_client && npm run copy_client",
     "start": "node server.js"
   },
