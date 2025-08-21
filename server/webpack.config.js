@@ -24,7 +24,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      jquery: 'jquery/src/jquery',
+      jquery: require.resolve('jquery'),
       lib: path.resolve(__dirname, 'lib'),
       less: path.resolve(__dirname, '../client/less')
     },
@@ -39,11 +39,6 @@ module.exports = {
       jQuery: 'jquery',
     })
   ],
-  resolve: {
-    alias: {
-      'jquery': require.resolve('jquery')
-    }
-  },
   devtool: 'eval-cheap-source-map',
   mode: 'development'
 }
